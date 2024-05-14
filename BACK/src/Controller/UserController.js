@@ -5,6 +5,7 @@ const { pool } = require("../Services/MySQLConnexion");
 var validator = require("validator");
 require("dotenv").config();
 
+//Fonction pour s'inscrire
 const ctrlRegister = async (req, res) => {
 	if (
 		!req.body.name ||
@@ -48,6 +49,7 @@ const ctrlRegister = async (req, res) => {
 	}
 };
 
+//Fonction pour se connecter
 const ctrlLogin = async (req, res) => {
 	if (!req.body.email || !req.body.password) {
 		res.status(400).json({ Error: "Missing Fields" });
@@ -96,6 +98,7 @@ const ctrlLogin = async (req, res) => {
 	}
 };
 
+//Fonction pour obtenier tous les utilisateurs pour l'admin
 const ctrlAllUsers = async (req, res) => {
 	try {
 		const [rows] = await pool.query("SELECT * FROM user");
@@ -107,6 +110,7 @@ const ctrlAllUsers = async (req, res) => {
 	}
 };
 
+//Fonction pour supprimer un utilisateur
 const ctrlDeleteUser = async (req, res) => {
 	let id = req.params.id;
 
@@ -123,6 +127,7 @@ const ctrlDeleteUser = async (req, res) => {
 	}
 };
 
+//Fonction pour modifier ses informations
 const ctrlUpdateUser = async (req, res) => {
 	try {
 		let data = req.data;
