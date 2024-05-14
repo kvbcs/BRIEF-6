@@ -37,7 +37,6 @@ const ctrlCreateListing = async (req, res) => {
 		res.status(400).json({ Error: "Error creating listing" });
 	}
 };
-// FIXME : user id
 
 const ctrlAllListings = async (req, res) => {
 	try {
