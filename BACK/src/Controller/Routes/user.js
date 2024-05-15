@@ -7,12 +7,10 @@ const {
 	ctrlAllUsers,
 } = require("../UserController");
 const { verifUpdateUser } = require("../../Middlewares/middlewares");
-// const { verifyUser } = require("../../Middlewares/middlewares");
 
 const userRouter = express.Router();
 
 userRouter.get("/all", ctrlAllUsers);
-// userRouter.get("/:id", ctrlOneUser);
 userRouter.post("/register", ctrlRegister);
 userRouter.post("/login", ctrlLogin);
 userRouter.delete("/delete/:id", ctrlDeleteUser);

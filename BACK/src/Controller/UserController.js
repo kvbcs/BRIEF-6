@@ -18,7 +18,7 @@ const ctrlRegister = async (req, res) => {
 	}
 
 	const name = req.body.name;
-	const photo = req.body.photo;
+	const photo = req.body.photo + insertPhoto;
 	const email = req.body.email;
 	const password = req.body.password;
 
