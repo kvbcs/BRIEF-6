@@ -41,13 +41,14 @@ header li {
 	padding-right: 20px;
 }
 
-main {
+section {
 	height: 90vh;
 	border: 2px solid blue;
-	background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE7xPXDzGUlvDdRxJr8jRubFPxAFjJyxnNNoMz0QyZCg&s");
+	background-image: url("https://i.ytimg.com/vi/wh48NrOoYus/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGBMgEyh_MA8=&rs=AOn4CLAwXDtr45FqSfbz5k-FaNn_nXBRtQ");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
 footer {
 	display: flex;
 	flex-direction: row;
