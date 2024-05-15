@@ -3,6 +3,7 @@ const { ObjectId } = require("bson");
 const jwt = require("jsonwebtoken");
 const { pool } = require("../Services/MySQLConnexion");
 var validator = require("validator");
+const { transporter } = require("../Services/mailer");
 require("dotenv").config();
 
 //Fonction pour s'inscrire
@@ -141,10 +142,22 @@ const ctrlUpdateUser = async (req, res) => {
 	}
 };
 
+const testEmail = async (req, res) => {
+	const info = await transporter.sendMail({
+		from: `${process.env.SMTP_EMAIL}`,
+		to: `kyllianvibancos2@gmail.com`,
+		subject: `Hello`,
+		html: `<p>Hello</p>`,
+	});
+	console.log("Message sent: %s", info.messageId);
+	res.status(200).json(`Message send with the id ${info.messageId}`);
+};
+
 module.exports = {
 	ctrlLogin,
 	ctrlRegister,
 	ctrlDeleteUser,
 	ctrlUpdateUser,
 	ctrlAllUsers,
+	testEmail,
 };
