@@ -18,10 +18,10 @@ const ctrlRegister = async (req, res) => {
 	}
 
 	const name = req.body.name;
-	const photo = req.body.photo + insertPhoto;
+	const photo = req.body.photo;
 	const email = req.body.email;
 	const password = req.body.password;
-
+	console.log(photo);
 	try {
 		const values = [email];
 		const sql = `SELECT email FROM user WHERE email = ?`;

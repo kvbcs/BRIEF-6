@@ -4,7 +4,6 @@ const cors = require("cors");
 const { connect } = require("./Services/MongoConnexion");
 const userRouter = require("./Controller/Routes/user");
 const listingRouter = require("./Controller/Routes/listing");
-const photoRouter = require("./Controller/Routes/photo");
 require("dotenv").config();
 
 app.use(express.urlencoded({ extended: true }));
