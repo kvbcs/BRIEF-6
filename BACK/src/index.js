@@ -4,6 +4,7 @@ const cors = require("cors");
 const { connect } = require("./Services/MongoConnexion");
 const userRouter = require("./Controller/Routes/user");
 const listingRouter = require("./Controller/Routes/listing");
+const commentRouter = require("./Controller/Routes/comment");
 require("dotenv").config();
 
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +24,7 @@ connect("mongodb://127.0.0.1:27017/", (error) => {
 //Mise en place des routes
 app.use("/user", userRouter);
 app.use("/listing", listingRouter);
+app.use("/comment", commentRouter);
 
 //Activation du port
 app.listen(process.env.PORT, () => {

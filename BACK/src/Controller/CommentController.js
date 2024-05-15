@@ -4,12 +4,13 @@ const { ObjectId } = require("bson");
 const jwt = require("jsonwebtoken");
 const { pool } = require("../Services/MySQLConnexion");
 const { extractToken } = require("../Utils/extractToken");
+const { Comment } = require("../Model/Comment");
 require("dotenv").config();
 
 //Fonction pour créer une publication
-const ctrlCreateListing = async (req, res) => {
-	if (!req.body.title || !req.body.text) {
-		res.status(400).send("Missing fields");
+const ctrlCreateComment = async (req, res) => {
+	if (!req.body.message) {
+		res.status(400).send("Missing field");
 		return;
 	}
 	const token = await extractToken(req);
@@ -27,37 +28,38 @@ const ctrlCreateListing = async (req, res) => {
 	});
 
 	console.log(id_user);
+	let id = req.params.id;
 	try {
-		let newListing = new Listing(req.body.title, req.body.text, 0, id_user);
+		let newComment = new Comment(req.body.message, id, id_user);
 		let result = await client
 			.db("BRIEF6")
-			.collection("listing")
-			.insertOne(newListing);
+			.collection("comment")
+			.insertOne(newComment);
 		res.status(200).json(result);
 	} catch (error) {
 		console.log(error.stack);
-		res.status(400).json({ Error: "Error creating listing" });
+		res.status(400).json({ Error: "Error creating comment" });
 	}
 };
 
-//Fonction pour voir toutes les publications
-const ctrlAllListings = async (req, res) => {
+//Fonction pour voir tous les commentaires
+const ctrlAllComments = async (req, res) => {
 	try {
-		let apiCall = client.db("BRIEF6").collection("listing").find();
+		let apiCall = client.db("BRIEF6").collection("comment").find();
 
-		let listings = await apiCall.toArray();
+		let comments = await apiCall.toArray();
 
-		res.status(200).json(listings);
+		res.status(200).json(comments);
 	} catch (error) {
 		console.log(error.stack);
-		res.status(400).json({ Error: "Error getting all listings" });
+		res.status(400).json({ Error: "Error getting all comments" });
 	}
 };
 
 //Fonction pour supprimer ses publications
-const ctrlDeleteListing = async (req, res) => {
-	let listingId = new ObjectId(req.params.id);
-	console.log(listingId);
+const ctrlDeleteComment = async (req, res) => {
+	let commentId = new ObjectId(req.params.id);
+	console.log(commentId);
 	const token = await extractToken(req);
 	let id_user;
 	console.log(token);
@@ -74,27 +76,22 @@ const ctrlDeleteListing = async (req, res) => {
 
 	console.log(id_user);
 
-	let listing = await client
+	let comment = await client
 		.db("BRIEF6")
-		.collection("listing")
-		.find({ _id: listingId });
+		.collection("comment")
+		.find({ _id: commentId });
 
-	if (!listing) {
-		res.status(401).json({ error: "Listing doesn't exist" });
+	if (!comment) {
+		res.status(401).json({ error: "Comment doesn't exist" });
 		return;
 	}
-
-	// if (listing.id_user !== jwt.id_user || role.id_role !== 2) {
-	// 	res.status(401).json({ error: "Failed to proceed" });
-	// 	return;
-	// }
 
 	try {
 		await client
 			.db("BRIEF6")
-			.collection("listing")
-			.deleteOne({ _id: listingId });
-		res.status(200).json({ Success: "Listing deleted" });
+			.collection("comment")
+			.deleteOne({ _id: commentId });
+		res.status(200).json({ Success: "Comment deleted" });
 	} catch (e) {
 		console.log(e.stack);
 		res.status(500).json({ Error: "Server error" });
@@ -102,9 +99,9 @@ const ctrlDeleteListing = async (req, res) => {
 };
 
 //Fonction pour modifier ses publications
-const ctrlUpdateListing = async (req, res) => {
-	let listingId = new ObjectId(req.params.id);
-	console.log(listingId);
+const ctrlUpdateComment = async (req, res) => {
+	let commentId = new ObjectId(req.params.id);
+	console.log(commentId);
 	const token = await extractToken(req);
 	let id_user;
 	console.log(token);
@@ -121,12 +118,12 @@ const ctrlUpdateListing = async (req, res) => {
 
 	console.log(id_user);
 
-	let listing = await client
+	let comment = await client
 		.db("BRIEF6")
-		.collection("listing")
-		.find({ _id: req.params.listingId });
+		.collection("comment")
+		.find({ _id: req.params.commentId });
 
-	if (!listing) {
+	if (!comment) {
 		res.status(401).json({ error: "Unauthorized" });
 		return;
 	}
@@ -134,15 +131,15 @@ const ctrlUpdateListing = async (req, res) => {
 	try {
 		let result = await client
 			.db("BRIEF6")
-			.collection("listing")
+			.collection("comment")
 			.updateOne(
-				{ _id: listingId },
+				{ _id: commentId },
 				{
-					$set: { title: req.body.title, text: req.body.text },
+					$set: { message: req.body.message },
 				}
 			);
 		console.log(result);
-		res.status(200).json({ Success: "Listing updated" });
+		res.status(200).json({ Success: "comment updated" });
 	} catch (e) {
 		console.log(e.stack);
 		res.status(500).json({ Error: "Server error" });
@@ -150,8 +147,8 @@ const ctrlUpdateListing = async (req, res) => {
 };
 
 module.exports = {
-	ctrlCreateListing,
-	ctrlAllListings,
-	ctrlDeleteListing,
-	ctrlUpdateListing,
+	ctrlCreateComment,
+	ctrlAllComments,
+	ctrlDeleteComment,
+	ctrlUpdateComment,
 };
