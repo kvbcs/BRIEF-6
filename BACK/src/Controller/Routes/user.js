@@ -7,13 +7,13 @@ const {
 	ctrlAllUsers,
 	testEmail,
 } = require("../UserController");
-const { verifUpdateUser } = require("../../Middlewares/middlewares");
+const { verifUpdateUser, verifData } = require("../../Middlewares/middlewares");
 const { insertPhoto } = require("../../Middlewares/multer");
 
 const userRouter = express.Router();
 
 userRouter.get("/all", ctrlAllUsers);
-userRouter.post("/register", ctrlRegister);
+userRouter.post("/register", verifData, ctrlRegister);
 userRouter.post("/photo", insertPhoto);
 userRouter.post("/login", ctrlLogin);
 userRouter.get("/email", testEmail);

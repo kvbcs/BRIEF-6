@@ -2,12 +2,23 @@ var validator = require("validator");
 
 const verifData = async (req, res, next) => {
 	const name = req.body.name;
+	const email = req.body.email;
+	const password = req.body.password;
 
 	if (!validator.isAlpha(name)) {
 		return res.json({ message: "Name must contain letters" });
 	}
+	if (!validator.isEmail(email)) {
+		return res.json({ message: "Invalid email" });
+	}
+	if (!validator.isStrongPassword(password)) {
+		return res.json({ message: "Weak password" });
+	}
 
 	req.name = name;
+	req.email = email;
+	req.password = password;
+
 	next();
 };
 

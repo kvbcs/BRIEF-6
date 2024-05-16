@@ -7,7 +7,6 @@
 body {
 	min-height: 100vh;
 	max-height: fit-content;
-	border: 2px solid green;
 	position: relative;
 	padding-bottom: 10vh;
 }
@@ -43,10 +42,10 @@ header li {
 
 section {
 	height: 90vh;
-	border: 2px solid blue;
-	background-image: url("https://i.ytimg.com/vi/wh48NrOoYus/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGBMgEyh_MA8=&rs=AOn4CLAwXDtr45FqSfbz5k-FaNn_nXBRtQ");
+	background-image: url("");
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: center;
 }
 
 footer {
