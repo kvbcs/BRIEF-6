@@ -7,11 +7,35 @@ main {
 	max-height: fit-content;
 	display: flex;
 	justify-content: center;
+	padding: 50px 0;
 }
 
 .listing {
 	border: 2px solid yellow;
 	color: white;
-	width: 40%;
-    
+	width: 45%;
+	background-color: rgb(53, 53, 53);
+	height: 200px;
+	border-radius: 25px;
+	box-shadow: 0 0 20px rgb(255, 0, 200);
+}
+.listing-info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	border: 2px solid red;
+	height: 30%;
+}
+.listing-user img {
+	height: 80%;
+	border-radius: 50%;
+}
+.listing-user {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+	width: 50%;
+	align-items: center;
+	border: 2px solid green;
 }
