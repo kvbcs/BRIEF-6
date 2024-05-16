@@ -1,0 +1,38 @@
+main {
+	width: 100%;
+	min-height: 80vh;
+	max-height: fit-content;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.form {
+	background: linear-gradient(0deg, rgb(0, 38, 255), rgb(0, 217, 255));
+	color: black;
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	gap: 20px;
+	border-radius: 25px;
+	padding: 20px 0;
+	font-size: 1.5em;
+    box-shadow: 0 0 20px rgb(255, 0, 242);
+}
+input {
+	width: 70%;
+	padding: 10px;
+	border-radius: 25px;
+	background-color: white;
+}
+label {
+	width: 70%;
+	text-align: left;
+}
+
+.form button {
+	width: 100px;
+}

@@ -1,0 +1,17 @@
+body {
+	background-color: black;
+}
+main {
+	border: 2px solid green;
+	min-height: 80vh;
+	max-height: fit-content;
+	display: flex;
+	justify-content: center;
+}
+
+.listing {
+	border: 2px solid yellow;
+	color: white;
+	width: 40%;
+    
+}
