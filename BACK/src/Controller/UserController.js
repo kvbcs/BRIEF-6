@@ -23,6 +23,7 @@ const ctrlRegister = async (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
 	console.log(photo);
+
 	try {
 		const values = [email];
 		const sql = `SELECT email FROM user WHERE email = ?`;
@@ -32,12 +33,35 @@ const ctrlRegister = async (req, res) => {
 			return;
 		} else {
 			const hashedPassword = await bcrypt.hash(password, 10);
-			const sqlInsertRequest = `INSERT INTO user VALUES (NULL, ?, ?, ?, ?, false, CURRENT_TIMESTAMP, 2, "")`;
-			const insertValues = [name, photo, email, hashedPassword];
+
+			const activationToken = await bcrypt.hash(email, 10);
+
+			const sqlInsertRequest = `INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, ?)`;
+
+			const insertValues = [
+				name,
+				photo,
+				email,
+				hashedPassword,
+				false,
+				activationToken,
+			];
+
 			const [rows] = await pool.execute(sqlInsertRequest, insertValues);
+
 			if (rows.affectedRows > 0) {
+				const info = await transporter.sendMail({
+					from: `${process.env.SMTP_EMAIL}`,
+					to: email,
+					subject: `Activate your account`,
+					html: `<p>Activate your account by clicking on the following link :</p><a href="http://localhost:7000/user/activate/${activationToken}">Verification link</a>`,
+				});
+
+				console.log("Message sent: %s", info.messageId);
+				res.status(200).json(
+					`Message send with the id ${info.messageId}`
+				);
 				console.log(rows);
-				res.status(200).json({ Success: "Register successful !" });
 				return;
 			} else {
 				res.status(400).json({ Error: "Register failed" });

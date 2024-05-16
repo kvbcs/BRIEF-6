@@ -13,10 +13,10 @@ const { insertPhoto } = require("../../Middlewares/multer");
 const userRouter = express.Router();
 
 userRouter.get("/all", ctrlAllUsers);
-userRouter.post("/register", verifData, ctrlRegister);
+userRouter.post("/register", ctrlRegister);
 userRouter.post("/photo", insertPhoto);
 userRouter.post("/login", ctrlLogin);
-userRouter.get("/email", testEmail);
+userRouter.get("/activate/:token");
 userRouter.delete("/delete/:id", ctrlDeleteUser);
 userRouter.patch("/update/:id", verifUpdateUser, ctrlUpdateUser);
 
