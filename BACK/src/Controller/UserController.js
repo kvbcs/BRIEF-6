@@ -35,6 +35,7 @@ const ctrlRegister = async (req, res) => {
 			const hashedPassword = await bcrypt.hash(password, 10);
 
 			const activationToken = await bcrypt.hash(email, 10);
+			const cleanToken = activationToken.replaceAll("/", "");
 
 			const sqlInsertRequest = `INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, ?)`;
 
@@ -44,7 +45,7 @@ const ctrlRegister = async (req, res) => {
 				email,
 				hashedPassword,
 				false,
-				activationToken,
+				cleanToken,
 			];
 
 			const [rows] = await pool.execute(sqlInsertRequest, insertValues);
@@ -54,7 +55,7 @@ const ctrlRegister = async (req, res) => {
 					from: `${process.env.SMTP_EMAIL}`,
 					to: email,
 					subject: `Activate your account`,
-					html: `<p>Activate your account by clicking on the following link :</p><a href="http://localhost:7000/user/activate/${activationToken}">Verification link</a>`,
+					html: `<p>Activate your account by clicking on the following link :</p><a href="http://localhost:7000/user/activate/${cleanToken}">Verification link</a>`,
 				});
 
 				console.log("Message sent: %s", info.messageId);
