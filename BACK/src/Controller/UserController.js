@@ -96,34 +96,39 @@ const activateEmail = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-	if (!email || !password) {
+	const name = req.body.name;
+	const email = req.body.email;
+	const new_password = req.body.new_password;
+
+	if (!name || !email || !new_password) {
 		res.status(400).json("Missing fields");
 		return;
 	}
-	const email = req.body.email;
-	const password = req.body.password;
+
+	// const values = [new_password];
+	// const sql = `SELECT password FROM user WHERE password = ?`;
+	// const [result] = await pool.execute(sql, values);
+	// if (result.length !== 0) {
+	// 	res.status(400).json({ Error: "Email already exists" });
+	// 	return;
+	// }
 
 	try {
-		const values = [email];
-		const sql = `SELECT email FROM user WHERE email = ?`;
+		const values = [name, email];
+		const sql = `SELECT name, email FROM user WHERE name = ? AND email = ?`;
 		const [result] = await pool.execute(sql, values);
-		if (result.length !== 0) {
-			const hashedPassword = await bcrypt.hash(password, 10);
+		if (result.length === 0) {
+			res.status(400).json("User does not exist");
+			return;
+		} else {
+			const hashedPassword = await bcrypt.hash(new_password, 10);
 
 			const activationToken = await bcrypt.hash(email, 10);
 			const cleanToken = activationToken.replaceAll("/", "");
 
-			const sqlInsertRequest = `INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)`;
+			const sqlInsertRequest = `UPDATE user SET password = ?, token = ?, isActive = ? WHERE name = ? AND email = ?`;
 
-			const insertValues = [
-				name,
-				photo,
-				email,
-				hashedPassword,
-				false,
-				0,
-				cleanToken,
-			];
+			const insertValues = [hashedPassword, cleanToken, 0, name, email];
 
 			const [rows] = await pool.execute(sqlInsertRequest, insertValues);
 			const info = await transporter.sendMail({
@@ -134,14 +139,33 @@ const resetPassword = async (req, res) => {
 			});
 
 			console.log("Message sent: %s", info.messageId);
-			res.status(200).json({ Success: `Registration successful` });
+			res.status(200).json({ Success: `Reset mail sent` });
 			console.log(rows);
 			return;
-		} else {
-			res.status(400).json({ Error: "Registration failed" });
 		}
 	} catch (error) {
 		res.status(500).json({ Error: "Server error" });
+		console.log(error.stack);
+	}
+};
+
+const activateReset = async (req, res) => {
+	try {
+		const token = req.params.token;
+		const sql = `SELECT * FROM user WHERE token = ?`;
+		const values = [token];
+		const [result] = await pool.execute(sql, values);
+		if (!result) {
+			res.status(204).json({ error: "Not found" });
+			return;
+		}
+		await pool.execute(
+			`UPDATE user SET isActive = ?, token = NULL WHERE token = ?`,
+			[1, token]
+		);
+		res.redirect("http://127.0.0.1:5500/FRONT/AUTH/login.html");
+	} catch (error) {
+		res.status(500).json({ error: "Server error" });
 		console.log(error.stack);
 	}
 };
@@ -259,4 +283,6 @@ module.exports = {
 	ctrlAllUsers,
 	testEmail,
 	activateEmail,
+	resetPassword,
+	activateReset,
 };

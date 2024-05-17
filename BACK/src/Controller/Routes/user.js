@@ -5,8 +5,9 @@ const {
 	ctrlDeleteUser,
 	ctrlUpdateUser,
 	ctrlAllUsers,
-	testEmail,
 	activateEmail,
+	activateReset,
+	resetPassword,
 } = require("../UserController");
 const { verifUpdateUser, verifData } = require("../../Middlewares/middlewares");
 const { insertPhoto } = require("../../Middlewares/multer");
@@ -18,6 +19,8 @@ userRouter.post("/register", ctrlRegister);
 userRouter.post("/photo", insertPhoto);
 userRouter.post("/login", ctrlLogin);
 userRouter.get("/activate/:token", activateEmail);
+userRouter.post("/reset", resetPassword);
+userRouter.get("/reset/:token", activateReset);
 userRouter.delete("/delete/:id", ctrlDeleteUser);
 userRouter.patch("/update/:id", verifUpdateUser, ctrlUpdateUser);
 
