@@ -88,7 +88,7 @@ const activateEmail = async (req, res) => {
 			`UPDATE user SET isActive = 1,id_role = 2, token = NULL WHERE token = ?`,
 			[token]
 		);
-		res.redirect("http://127.0.0.1:5500/FRONT/USER/user.html");
+		res.redirect("http://127.0.0.1:5500/FRONT/AUTH/login.html");
 	} catch (error) {
 		res.status(500).json({ error: "Server error" });
 		console.log(error.stack);

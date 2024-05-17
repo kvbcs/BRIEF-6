@@ -60,7 +60,7 @@ async function handleLogin() {
 		if (role === "admin") {
 			window.location.href = "../ADMIN/admin.html";
 		} else {
-			window.location.href = "../INDEX/index.html";
+			window.location.href = "../USER/user.html";
 		}
 	} else {
 		alert("Invalid credentials");
