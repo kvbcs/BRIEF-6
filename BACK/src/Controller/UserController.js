@@ -37,7 +37,7 @@ const ctrlRegister = async (req, res) => {
 			const activationToken = await bcrypt.hash(email, 10);
 			const cleanToken = activationToken.replaceAll("/", "");
 
-			const sqlInsertRequest = `INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 2, ?)`;
+			const sqlInsertRequest = `INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)`;
 
 			const insertValues = [
 				name,
@@ -45,6 +45,7 @@ const ctrlRegister = async (req, res) => {
 				email,
 				hashedPassword,
 				false,
+				0,
 				cleanToken,
 			];
 
@@ -59,19 +60,89 @@ const ctrlRegister = async (req, res) => {
 				});
 
 				console.log("Message sent: %s", info.messageId);
-				res.status(200).json(
-					`Message send with the id ${info.messageId}`
-				);
+				res.status(200).json({ Success: `Registration successful` });
 				console.log(rows);
 				return;
 			} else {
-				res.status(400).json({ Error: "Register failed" });
+				res.status(400).json({ Error: "Registration failed" });
 			}
 		}
 	} catch (error) {
 		console.log(error.stack);
 		res.status(500).json({ Error: "Server error" });
 		return;
+	}
+};
+
+const activateEmail = async (req, res) => {
+	try {
+		const token = req.params.token;
+		const sql = `SELECT * FROM user WHERE token = ?`;
+		const values = [token];
+		const [result] = await pool.execute(sql, values);
+		if (!result) {
+			res.status(204).json({ error: "Not found" });
+			return;
+		}
+		await pool.execute(
+			`UPDATE user SET isActive = 1,id_role = 2, token = NULL WHERE token = ?`,
+			[token]
+		);
+		res.redirect("http://127.0.0.1:5500/FRONT/USER/user.html");
+	} catch (error) {
+		res.status(500).json({ error: "Server error" });
+		console.log(error.stack);
+	}
+};
+
+const resetPassword = async (req, res) => {
+	if (!email || !password) {
+		res.status(400).json("Missing fields");
+		return;
+	}
+	const email = req.body.email;
+	const password = req.body.password;
+
+	try {
+		const values = [email];
+		const sql = `SELECT email FROM user WHERE email = ?`;
+		const [result] = await pool.execute(sql, values);
+		if (result.length !== 0) {
+			const hashedPassword = await bcrypt.hash(password, 10);
+
+			const activationToken = await bcrypt.hash(email, 10);
+			const cleanToken = activationToken.replaceAll("/", "");
+
+			const sqlInsertRequest = `INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)`;
+
+			const insertValues = [
+				name,
+				photo,
+				email,
+				hashedPassword,
+				false,
+				0,
+				cleanToken,
+			];
+
+			const [rows] = await pool.execute(sqlInsertRequest, insertValues);
+			const info = await transporter.sendMail({
+				from: `${process.env.SMTP_EMAIL}`,
+				to: email,
+				subject: `Reset your password`,
+				html: `<p>Reset your password by clicking on the following link :</p><a href="http://localhost:7000/user/reset/${cleanToken}">Reset link</a>`,
+			});
+
+			console.log("Message sent: %s", info.messageId);
+			res.status(200).json({ Success: `Registration successful` });
+			console.log(rows);
+			return;
+		} else {
+			res.status(400).json({ Error: "Registration failed" });
+		}
+	} catch (error) {
+		res.status(500).json({ Error: "Server error" });
+		console.log(error.stack);
 	}
 };
 
@@ -86,7 +157,7 @@ const ctrlLogin = async (req, res) => {
 
 	try {
 		const values = [email];
-		const sql = `SELECT * FROM user WHERE email = ?`;
+		const sql = `SELECT * FROM user INNER JOIN role ON user.id_role = role.id_role WHERE email = ? AND isActive = 1`;
 		const [rows] = await pool.execute(sql, values);
 
 		console.log(rows);
@@ -107,6 +178,7 @@ const ctrlLogin = async (req, res) => {
 				const token = jwt.sign(
 					{
 						id_user: rows[0].id_user,
+						email: rows[0].email,
 					},
 					process.env.SECRET_KEY,
 					{
@@ -114,7 +186,7 @@ const ctrlLogin = async (req, res) => {
 					}
 				);
 				console.log(rows);
-				res.status(200).json({ jwt: token, role: rows[0].id_role });
+				res.status(200).json({ jwt: token, role: rows[0].name_role });
 				return;
 			}
 		}
@@ -127,7 +199,8 @@ const ctrlLogin = async (req, res) => {
 //Fonction pour obtenier tous les utilisateurs pour l'admin
 const ctrlAllUsers = async (req, res) => {
 	try {
-		const [rows] = await pool.query("SELECT * FROM user");
+		const sql = "SELECT id_user, name FROM user";
+		const [rows] = await pool.query(sql);
 		console.log(rows);
 		res.status(200).json(rows);
 	} catch (error) {
@@ -185,4 +258,5 @@ module.exports = {
 	ctrlUpdateUser,
 	ctrlAllUsers,
 	testEmail,
+	activateEmail,
 };
