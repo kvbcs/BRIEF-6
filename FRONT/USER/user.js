@@ -18,9 +18,11 @@ async function getAllListings() {
         </div>
         <button>Follow</button>
         </div>
+		<div class="listing-text">
                 <h3>${listing.title}</h3>  
 
         <p>${listing.text}</p>
+		</div>
         </div>
 	`;
 	});

@@ -1,5 +1,10 @@
 body {
 	background-color: black;
+	position: relative;
+}
+header {
+	position: fixed;
+	width: 100%;
 }
 main {
 	border: 2px solid green;
@@ -9,25 +14,28 @@ main {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 50px;
-	padding: 50px 0;
+	gap: 100px;
+	padding: 20vh 0;
 }
 
 .listing {
-	border: 2px solid yellow;
 	color: white;
 	width: 45%;
-	background-color: rgb(53, 53, 53);
-	height: 200px;
+	background: linear-gradient(0deg, rgb(0, 0, 255), rgb(0, 204, 255));
+	height: 30vh;
 	border-radius: 25px;
 	box-shadow: 0 0 20px rgb(255, 0, 200);
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 .listing-info {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
+	justify-content: space-between;
+	padding: 0 10px;
 	align-items: center;
-	border: 2px solid red;
 	height: 30%;
 }
 .listing-user img {
@@ -40,5 +48,12 @@ main {
 	height: 100%;
 	width: 50%;
 	align-items: center;
-	border: 2px solid green;
+}
+.listing-text {
+	padding: 10px;
+	width: 90%;
+	height: 50%;
+	background-color: white;
+	color: black;
+	border-radius: 25px;
 }
