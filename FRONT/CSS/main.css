@@ -1,0 +1,10 @@
+body {
+	min-height: 100dvh;
+	max-height: fit-content;
+	position: relative;
+}
+
+main {
+	min-height: 80vh;
+	max-height: fit-content;
+}

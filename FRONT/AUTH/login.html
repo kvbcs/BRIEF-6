@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Social Network</title>
-		<link rel="stylesheet" href="../CSS/login.css" />
+		<link rel="stylesheet" href="../CSS/main.css" />
 	</head>
 	<body>
 		<header
@@ -19,16 +19,16 @@
 			<div class="w-fit gap-8 flex flex-row justify-between">
 				<a href="../INDEX/index.html"
 					><button
-						class="py-1.5 bg-sky-700 rounded-lg px-3.5 transition ease-in-out hover:bg-slate-50 hover:text-slate-950"
+						class="flex gap-2.5 items-center py-1.5 bg-sky-700 rounded-lg px-3.5 transition ease-in-out hover:bg-slate-50 hover:text-slate-950"
 					>
-						Main menu
+						<i class="fa-solid fa-house"></i>Home
 					</button></a
 				>
 			</div>
 		</header>
 
-		<div
-			class="min-h-dvh flex flex-col justify-center px-6 py-12 lg:px-8 max-h-fit bg-slate-800"
+		<main
+			class="flex flex-col justify-center px-6 py-12 lg:px-8 bg-slate-800"
 		>
 			<div
 				class="items-center flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-sm"
@@ -41,9 +41,7 @@
 				<h1 class="mt-5 text-2xl font-bold text-slate-50">Log in</h1>
 			</div>
 
-			<div
-				class="border-2 mt-10 lg:w-1/2 sm:mx-auto sm:w-full sm:max-w-sm"
-			>
+			<div class="mt-10 lg:w-1/2 sm:mx-auto sm:w-full sm:max-w-sm">
 				<div class="space-y-6">
 					<div>
 						<label
@@ -53,7 +51,7 @@
 						>
 						<div class="mt-2">
 							<input
-								id="email"
+								id="login-email"
 								name="email"
 								type="email"
 								autocomplete="email"
@@ -81,7 +79,7 @@
 						</div>
 						<div class="mt-2">
 							<input
-								id="password"
+								id="login-password"
 								name="password"
 								type="password"
 								autocomplete="current-password"
@@ -112,13 +110,13 @@
 					>
 				</p>
 			</div>
-		</div>
+		</main>
 
 		<footer
-			class="w-full flex flex-row justify-evenly px-3.5 items-center h-32 bg-slate-950 text-white"
+			class="absolute bottom-0 w-full flex flex-row justify-evenly px-3.5 items-center h-32 bg-slate-950 text-white"
 		>
 			<h2 class="text-lg leading-8 text-gray-300">
-				Copyright - Simplon 2024
+				Copyright - Simplon® 2024
 			</h2>
 			<h2 class="text-lg leading-8 text-gray-300">About</h2>
 			<h2 class="text-lg leading-8 text-gray-300">Contact</h2>

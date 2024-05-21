@@ -1,4 +1,3 @@
-console.log("alo");
 
 async function handleRegister() {
 	let name = document.querySelector("#name").value;
