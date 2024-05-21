@@ -3,42 +3,121 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Social</title>
+		<title>Social Network</title>
 		<link rel="stylesheet" href="../CSS/style.css" />
-		<link rel="stylesheet" href="../CSS/form.css" />
 	</head>
 	<body>
-		<header>
-			<a href="../INDEX/index.html"><h2>Social</h2></a>
-
-			<nav>
+		<header
+			class="flex flex-row justify-between items-center h-16 bg-slate-950 text-white px-8"
+		>
+			<a href="../INDEX/index.html"> <h2>Social Network</h2></a>
+			<div class="w-fit gap-8 flex flex-row justify-between">
 				<a href="../INDEX/index.html"
-					><button>
+					><button
+						class="py-1.5 bg-sky-700 rounded-lg px-3.5 transition ease-in-out hover:bg-slate-50 hover:text-slate-950"
+					>
 						Main menu
-						<i class="fa-solid fa-right-to-bracket"></i></button
-				></a>
-			</nav>
-		</header>
-		<main>
-			<div class="form">
-				<h1>Register</h1>
-				<label for="name">Name</label>
-				<input type="text" name="name" id="name" />
-
-				<label for="photo">Avatar</label>
-				<input type="file" name="photo" id="photo" />
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email" />
-				<label for="password">Password</label>
-				<input type="text" name="password" id="password" />
-				<button type="submit" onclick="handleRegister()">Submit</button>
-				<p>Already have an account ? <a href="login.html">Login</a></p>
+					</button></a
+				>
 			</div>
-		</main>
-		<footer>
-			<h2>Copyright - Simplon 2024</h2>
+		</header>
+
+		<div
+			class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 min-h-dvh max-h-fit bg-slate-800"
+		>
+			<div class="sm:mx-auto sm:w-full sm:max-w-sm">
+				<img
+					class="mx-auto h-10 w-auto"
+					src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+					alt="Social Network logo"
+				/>
+				<h2
+					class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-slate-50"
+				>
+					Sign in to your account
+				</h2>
+			</div>
+
+			<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+				<div class="space-y-6">
+					<div>
+						<label
+							for="email"
+							class="block text-sm font-medium leading-6 text-slate-50"
+							>Email address</label
+						>
+						<div class="mt-2">
+							<input
+								id="email"
+								name="email"
+								type="email"
+								autocomplete="email"
+								required
+								class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							/>
+						</div>
+					</div>
+
+					<div>
+						<div class="flex items-center justify-between">
+							<label
+								for="password"
+								class="block text-sm font-medium leading-6 text-gray-900"
+								>Password</label
+							>
+							<div class="text-sm">
+								<a
+									href="#"
+									class="font-semibold text-indigo-600 hover:text-indigo-500"
+									>Forgot password?</a
+								>
+							</div>
+						</div>
+						<div class="mt-2">
+							<input
+								id="password"
+								name="password"
+								type="password"
+								autocomplete="current-password"
+								required
+								class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							/>
+						</div>
+					</div>
+
+					<div>
+						<button
+							type="submit"
+							class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+						>
+							Sign in
+						</button>
+					</div>
+				</div>
+
+				<p class="mt-10 text-center text-sm text-gray-500">
+					Not a member?
+					<a
+						href="#"
+						class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+						>Start a 14 day free trial</a
+					>
+				</p>
+			</div>
+		</div>
+
+		<footer
+			class="w-full flex flex-row justify-evenly px-3.5 items-center h-32 bg-slate-950 text-white"
+		>
+			<h2 class="text-lg leading-8 text-gray-300">
+				Copyright - Simplon 2024
+			</h2>
+			<h2 class="text-lg leading-8 text-gray-300">About</h2>
+			<h2 class="text-lg leading-8 text-gray-300">Contact</h2>
+			<h2 class="text-lg leading-8 text-gray-300">GDPR</h2>
 		</footer>
 	</body>
+	<script src="https://cdn.tailwindcss.com"></script>
 	<script
 		src="https://kit.fontawesome.com/120f5ae848.js"
 		crossorigin="anonymous"
