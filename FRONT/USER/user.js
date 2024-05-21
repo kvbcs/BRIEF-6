@@ -10,22 +10,23 @@ async function getAllListings() {
 	console.log(response);
 
 	response.forEach((listing) => {
-		main.innerHTML += `<div class="flex items-center justify-center min-h-screen">
+		main.innerHTML += `<div class="flex items-center justify-center min-h-fit max-h-52">
 				<div class="rounded-xl border p-5 shadow-md w-9/12 bg-white">
 					<div
 						class="flex w-full items-center justify-between border-b pb-3"
 					>
 						<div class="flex items-center space-x-3">
-							<div
-								class="h-16 w-16 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')] bg-no-repeat bg-cover bg-center"
-							></div>
+							<img
+							src="${listing.photo}"
+								class="h-16 w-16 rounded-full bg-slate-400"
+							></img>
 							<div class="text-lg font-bold text-slate-700">
-							
+								${listing.username}
 							</div>
 						</div>
 						<div class="flex items-center space-x-8">
 							<button
-								class="bg-sky-500 text-white px-2.5 py-1.5 rounded-md"
+								class="bg-sky-500 text-white px-2.5 py-1.5 rounded-md followBtn"
 							>
 								Follow
 							</button>
@@ -34,17 +35,10 @@ async function getAllListings() {
 
 					<div class="mt-4 mb-6">
 						<div class="mb-3 text-xl font-bold">
-							Nulla sed leo tempus, feugiat velit vel, rhoncus
-							neque?
+							${listing.title}
 						</div>
 						<div class="text-sm text-neutral-600">
-							Aliquam a tristique sapien, nec bibendum urna.
-							Maecenas convallis dignissim turpis, non suscipit
-							mauris interdum at. Morbi sed gravida nisl, a
-							pharetra nulla. Etiam tincidunt turpis leo, ut
-							mollis ipsum consectetur quis. Etiam faucibus est
-							risus, ac condimentum mauris consequat nec.
-							Curabitur eget feugiat massa
+							${listing.text}
 						</div>
 					</div>
 
@@ -57,7 +51,7 @@ async function getAllListings() {
 									class="flex gap-2.5 cursor-pointer items-center transition hover:text-slate-600"
 								>
 									<i class="fa-solid fa-comment"></i>
-									<span>1250</span>
+									<span>${listing.comment_number}</span>
 								</div>
 								<div
 									class="flex cursor-pointer items-center transition hover:text-slate-600"
@@ -71,7 +65,7 @@ async function getAllListings() {
 												>
 													<span
 														class="like-text-content"
-														>123</span
+														>${listing.like_number}</span
 													>
 													<input
 														class="input-box"
@@ -142,7 +136,7 @@ async function getAllListings() {
 													</svg>
 													<span
 														class="dislike-text-content"
-														>4</span
+														>${listing.dislike_number}</span
 													>
 												</label>
 											</div>
