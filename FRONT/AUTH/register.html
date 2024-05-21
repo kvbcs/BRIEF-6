@@ -10,7 +10,12 @@
 		<header
 			class="flex flex-row justify-between items-center h-16 bg-slate-950 text-white px-8"
 		>
-			<a href="../INDEX/index.html"> <h2>Social Network</h2></a>
+			<a href="../INDEX/index.html">
+				<img
+					class="h-16"
+					src="../MEDIA/LOGO3.png"
+					alt="Social Network logo"
+			/></a>
 			<div class="w-fit gap-8 flex flex-row justify-between">
 				<a href="../INDEX/index.html"
 					><button
@@ -25,26 +30,58 @@
 		<div
 			class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 min-h-dvh max-h-fit bg-slate-800"
 		>
-			<div class="sm:mx-auto sm:w-full sm:max-w-sm">
+			<div
+				class="items-center flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-sm"
+			>
 				<img
-					class="mx-auto h-10 w-auto"
-					src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+					class="pl-4 mx-auto h-16 w-auto"
+					src="../MEDIA/register.png"
 					alt="Social Network logo"
 				/>
-				<h2
-					class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-slate-50"
-				>
-					Sign in to your account
-				</h2>
+				<h1 class="mt-5 text-2xl font-bold text-slate-50">Register</h1>
 			</div>
 
 			<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 				<div class="space-y-6">
 					<div>
 						<label
+							for="username"
+							class="block text-sm font-medium leading-6 text-slate-50"
+							>Username</label
+						>
+						<div class="mt-2">
+							<input
+								id="username"
+								name="username"
+								type="text"
+								required
+								placeholder="Enter a valid username..."
+								class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							/>
+						</div>
+					</div>
+					<div>
+						<label
+							for="photo"
+							class="block text-sm font-medium leading-6 text-slate-50"
+							>Avatar</label
+						>
+						<div class="mt-2">
+							<input
+								id="photo"
+								name="photo"
+								type="file"
+								required
+								class="px-2.5 bg-slate-50 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								placeholder="Choose a file..."
+							/>
+						</div>
+					</div>
+					<div>
+						<label
 							for="email"
 							class="block text-sm font-medium leading-6 text-slate-50"
-							>Email address</label
+							>Email</label
 						>
 						<div class="mt-2">
 							<input
@@ -53,7 +90,8 @@
 								type="email"
 								autocomplete="email"
 								required
-								class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								placeholder="Enter a valid email address..."
+								class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 							/>
 						</div>
 					</div>
@@ -62,16 +100,9 @@
 						<div class="flex items-center justify-between">
 							<label
 								for="password"
-								class="block text-sm font-medium leading-6 text-gray-900"
+								class="text-slate-50 block text-sm font-medium leading-6 text-gray-900"
 								>Password</label
 							>
-							<div class="text-sm">
-								<a
-									href="#"
-									class="font-semibold text-indigo-600 hover:text-indigo-500"
-									>Forgot password?</a
-								>
-							</div>
 						</div>
 						<div class="mt-2">
 							<input
@@ -80,7 +111,8 @@
 								type="password"
 								autocomplete="current-password"
 								required
-								class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								placeholder="Enter a valid password..."
+								class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 							/>
 						</div>
 					</div>
@@ -88,19 +120,20 @@
 					<div>
 						<button
 							type="submit"
-							class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+							onclick="handleRegister()"
+							class="flex w-full justify-center rounded-md bg-sky-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 						>
-							Sign in
+							Submit
 						</button>
 					</div>
 				</div>
 
-				<p class="mt-10 text-center text-sm text-gray-500">
-					Not a member?
+				<p class="mt-10 text-center text-sm text-slate-50">
+					Already a member?
 					<a
-						href="#"
-						class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-						>Start a 14 day free trial</a
+						href="../AUTH/login.html"
+						class="font-semibold leading-6 text-sky-400 hover:text-sky-600"
+						>Log in</a
 					>
 				</p>
 			</div>

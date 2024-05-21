@@ -3,39 +3,129 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Social</title>
-		<link rel="stylesheet" href="../CSS/style.css" />
-		<link rel="stylesheet" href="../CSS/form.css" />
+		<title>Social Network</title>
+		<link rel="stylesheet" href="../CSS/login.css" />
 	</head>
 	<body>
-		<header>
-			<a href="../INDEX/index.html"><h2>Social</h2></a>
-
-			<nav>
+		<header
+			class="flex flex-row justify-between items-center h-24 bg-slate-950 text-white px-8"
+		>
+			<a href="../INDEX/index.html">
+				<img
+					class="h-16"
+					src="../MEDIA/LOGO3.png"
+					alt="Social Network logo"
+			/></a>
+			<div class="w-fit gap-8 flex flex-row justify-between">
 				<a href="../INDEX/index.html"
-					><button>
+					><button
+						class="py-1.5 bg-sky-700 rounded-lg px-3.5 transition ease-in-out hover:bg-slate-50 hover:text-slate-950"
+					>
 						Main menu
-						<i class="fa-solid fa-right-to-bracket"></i></button
-				></a>
-			</nav>
+					</button></a
+				>
+			</div>
 		</header>
-		<main>
-			<div class="form">
-				<h1>Login</h1>
-				<label for="email">Email</label>
-				<input type="email" name="email" id="login-email" />
-				<label for="password">Password</label>
-				<input type="text" name="password" id="login-password" />
-				<button type="submit" onclick="handleLogin()">Submit</button>
-				<p>
-					Don't have an account ? <a href="register.html">Register</a>
+
+		<div
+			class="min-h-dvh flex flex-col justify-center px-6 py-12 lg:px-8 max-h-fit bg-slate-800"
+		>
+			<div
+				class="items-center flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-sm"
+			>
+				<img
+					class="mx-auto h-16 w-auto"
+					src="../MEDIA/login.png"
+					alt="Social Network logo"
+				/>
+				<h1 class="mt-5 text-2xl font-bold text-slate-50">Log in</h1>
+			</div>
+
+			<div
+				class="border-2 mt-10 lg:w-1/2 sm:mx-auto sm:w-full sm:max-w-sm"
+			>
+				<div class="space-y-6">
+					<div>
+						<label
+							for="email"
+							class="block text-sm font-medium leading-6 text-slate-50"
+							>Email</label
+						>
+						<div class="mt-2">
+							<input
+								id="email"
+								name="email"
+								type="email"
+								autocomplete="email"
+								required
+								placeholder="Enter a valid email address..."
+								class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							/>
+						</div>
+					</div>
+
+					<div>
+						<div class="flex items-center justify-between">
+							<label
+								for="password"
+								class="text-slate-50 block text-sm font-medium leading-6 text-gray-900"
+								>Password</label
+							>
+							<div class="text-sm">
+								<a
+									href="#"
+									class="font-semibold text-sky-400 hover:text-sky-600"
+									>Forgot password?</a
+								>
+							</div>
+						</div>
+						<div class="mt-2">
+							<input
+								id="password"
+								name="password"
+								type="password"
+								autocomplete="current-password"
+								required
+								placeholder="Enter a valid password..."
+								class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							/>
+						</div>
+					</div>
+
+					<div>
+						<button
+							type="submit"
+							onclick="handleLogin()"
+							class="flex w-full justify-center rounded-md bg-sky-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+						>
+							Log in
+						</button>
+					</div>
+				</div>
+
+				<p class="mt-10 text-center text-sm text-slate-50">
+					Not a member?
+					<a
+						href="../AUTH/register.html"
+						class="font-semibold leading-6 text-sky-400 hover:text-sky-600"
+						>Register</a
+					>
 				</p>
 			</div>
-		</main>
-		<footer>
-			<h2>Copyright - Simplon 2024</h2>
+		</div>
+
+		<footer
+			class="w-full flex flex-row justify-evenly px-3.5 items-center h-32 bg-slate-950 text-white"
+		>
+			<h2 class="text-lg leading-8 text-gray-300">
+				Copyright - Simplon 2024
+			</h2>
+			<h2 class="text-lg leading-8 text-gray-300">About</h2>
+			<h2 class="text-lg leading-8 text-gray-300">Contact</h2>
+			<h2 class="text-lg leading-8 text-gray-300">GDPR</h2>
 		</footer>
 	</body>
+	<script src="https://cdn.tailwindcss.com"></script>
 	<script
 		src="https://kit.fontawesome.com/120f5ae848.js"
 		crossorigin="anonymous"
