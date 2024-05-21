@@ -1,6 +1,5 @@
-
 async function handleRegister() {
-	let name = document.querySelector("#name").value;
+	let name = document.querySelector("#username").value;
 	let photo = document.querySelector("#photo").value;
 	let email = document.querySelector("#email").value;
 	let password = document.querySelector("#password").value;
