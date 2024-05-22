@@ -9,8 +9,12 @@ async function getAllListings() {
 	let response = await apiCall.json();
 	console.log(response);
 
+	// onclick="likeContent('${listing._id}')
+	//TODO: faire un bouton qui recup l'id, vire tout le component
+
 	response.forEach((listing) => {
-		main.innerHTML += `<div class="flex items-center justify-center min-h-fit max-h-52">
+		main.innerHTML += `
+			<div class="flex items-center justify-center min-h-fit max-h-52">
 				<div class="rounded-xl border p-5 shadow-md w-9/12 bg-white">
 					<div
 						class="flex w-full items-center justify-between border-b pb-3"
@@ -64,16 +68,16 @@ async function getAllListings() {
 													for="like-checkbox"
 												>
 													<span
-														class="like-text-content"
+														class="like-text-content opacity-1"
 														>${listing.like_number}</span
 													>
 													<input
-														class="input-box"
+														class="input-box  opacity-1" 
 														id="like-checkbox"
 														type="checkbox"
 													/>
 													<svg
-														class="svgs"
+														class="svgs  opacity-1"
 														id="icon-like-solid"
 														xmlns="http://www.w3.org/2000/svg"
 														viewBox="0 0 512 512"
@@ -98,6 +102,7 @@ async function getAllListings() {
 														></div>
 													</div>
 												</label>
+												</button>
 											</div>
 											<div class="icons">
 												<label
@@ -106,7 +111,7 @@ async function getAllListings() {
 												>
 													<input
 														class="input-box"
-														id="dislike-checkbox"
+														class="dislike-checkbox"
 														type="checkbox"
 													/>
 													<div class="fireworks">
@@ -184,6 +189,7 @@ async function createListing() {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json; charset=utf-8",
+			Authorization: `Bearer ${jwt}`,
 		},
 		body: JSON.stringify(listing),
 	};
@@ -203,4 +209,8 @@ async function createListing() {
 function removeModal() {
 	let postModal = document.querySelector(".postModal");
 	postModal.classList.add("hidden");
+}
+
+async function likeContent(id) {
+	console.log(id);
 }
