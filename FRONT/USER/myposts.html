@@ -24,10 +24,10 @@
 			/></a>
 
 			<ul class="flex flex-row gap-5 divide-x">
-				<li class="underline">Home</li>
-				<a href="#"><li class="pl-3">Profile</li></a>
-				<a href="#"><li class="pl-3">My posts</li></a>
-				<a href="#"><li class="pl-3">My follows</li></a>
+				<a href="./user.html"><li class="">Home</li></a>
+				<a href="./profile.html"><li class="pl-3">Profile</li></a>
+				<li class="pl-3 underline">My posts</li>
+				<a href="./myfollows.html"><li class="pl-3">My follows</li></a>
 			</ul>
 
 			<div class="w-fit gap-8 flex flex-row justify-between">
@@ -41,31 +41,48 @@
 		</header>
 
 		<main
-			class="flex flex-col justify-center items-center gap-28 px-6 py-12 lg:px-8 bg-slate-800 pb-64 pt-24"
+			class="flex flex-col justify-evenly gap-28 px-6 py-12 lg:px-8 bg-slate-800 pb-64 pt-24"
 		>
-			<div class="container">
-				<h1 class="mb-8 text-center text-slate-50">All users</h1>
-
-				<table class="text-center w-full">
-					<thead class="bg-black flex text-white w-full">
-						<tr class="flex w-full mb-4">
-							<th class="p-4 w-1/4">Username</th>
-							<th class="p-4 w-1/4">Email</th>
-							<th class="p-4 w-1/4">Status</th>
-							<th class="p-4 w-1/4">Created At</th>
-						</tr>
-					</thead>
-					<tbody
-						class="bg-slate-50 flex flex-col items-center justify-between overflow-y-scroll w-full"
+			<div class="flex items-center justify-center min-h-fit max-h-52">
+				<div class="rounded-xl border p-5 shadow-md w-9/12 bg-white">
+					<div
+						class="flex w-full items-center justify-between border-b pb-3"
 					>
-						<tr class="flex w-full mb-4">
-							<td class="p-4 w-1/4">name</td>
-							<td class="p-4 w-1/4">email</td>
-							<td class="p-4 w-1/4">1</td>
-							<td class="p-4 w-1/4">2024-04-05</td>
-						</tr>
-					</tbody>
-				</table>
+						<div class="flex items-center space-x-3">
+							<img
+								src="../MEDIA/login.png"
+								class="h-16 w-16 rounded-full bg-slate-400"
+							/>
+							<div class="text-lg font-bold text-slate-700">
+								${listing.username}
+							</div>
+						</div>
+					</div>
+
+					<div class="mt-4 mb-6">
+						<div class="mb-3 text-xl font-bold">
+							${listing.title}
+						</div>
+						<div class="text-sm text-neutral-600">
+							${listing.text}
+						</div>
+					</div>
+
+					<div>
+						<div
+							class="flex items-center justify-between text-slate-500"
+						>
+							<div class="flex space-x-4 md:space-x-8">
+								<div
+									class="flex gap-2.5 cursor-pointer items-center transition hover:text-slate-600"
+								>
+									<i class="fa-solid fa-comment"></i>
+									<span>${listing.comment_number}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</main>
 
@@ -85,5 +102,4 @@
 		src="https://kit.fontawesome.com/120f5ae848.js"
 		crossorigin="anonymous"
 	></script>
-	<script src="admin.js"></script>
 </html>

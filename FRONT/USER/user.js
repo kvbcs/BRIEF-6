@@ -1,5 +1,6 @@
 let main = document.querySelector("main");
 let jwt = window.sessionStorage.getItem("jwt");
+let role = window.sessionStorage.getItem("role");
 let followBtn = document.querySelectorAll(".followBtn");
 
 function follow() {}
@@ -19,7 +20,7 @@ async function getAllListings() {
 							<img
 							src="${listing.photo}"
 								class="h-16 w-16 rounded-full bg-slate-400"
-							></img>
+							>
 							<div class="text-lg font-bold text-slate-700">
 								${listing.username}
 							</div>

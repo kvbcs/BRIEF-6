@@ -24,10 +24,10 @@
 			/></a>
 
 			<ul class="flex flex-row gap-5 divide-x">
-				<li class="underline">Home</li>
-				<a href="#"><li class="pl-3">Profile</li></a>
-				<a href="#"><li class="pl-3">My posts</li></a>
-				<a href="#"><li class="pl-3">My follows</li></a>
+				<a href="./user.html"><li class="">Home</li></a>
+				<li class="pl-3 underline">Profile</li>
+				<a href="./myposts.html"><li class="pl-3">My posts</li></a>
+				<a href="./myfollows.html"><li class="pl-3">My follows</li></a>
 			</ul>
 
 			<div class="w-fit gap-8 flex flex-row justify-between">
@@ -43,29 +43,43 @@
 		<main
 			class="flex flex-col justify-center items-center gap-28 px-6 py-12 lg:px-8 bg-slate-800 pb-64 pt-24"
 		>
-			<div class="container">
-				<h1 class="mb-8 text-center text-slate-50">All users</h1>
+			<div
+				class="flex flex-col justify-center items-center w-1/2 max-w-lg my-10 bg-white rounded-lg shadow-lg p-5"
+			>
+				<img
+					class="w-32 h-32 rounded-full mx-auto"
+					src="https://picsum.photos/200"
+					alt="Profile picture"
+				/>
+				<h2 class="text-center text-2xl font-semibold mt-3">
+					Username
+				</h2>
+				<p class="text-center text-gray-600 mt-1">John Doe</p>
 
-				<table class="text-center w-full">
-					<thead class="bg-black flex text-white w-full">
-						<tr class="flex w-full mb-4">
-							<th class="p-4 w-1/4">Username</th>
-							<th class="p-4 w-1/4">Email</th>
-							<th class="p-4 w-1/4">Status</th>
-							<th class="p-4 w-1/4">Created At</th>
-						</tr>
-					</thead>
-					<tbody
-						class="bg-slate-50 flex flex-col items-center justify-between overflow-y-scroll w-full"
+				<div class="mt-5">
+					<h3 class="text-xl font-semibold text-center">Email</h3>
+					<p class="text-gray-600 mt-2">email@gmail.com</p>
+				</div>
+				<div class="mt-5">
+					<a
+						href="#"
+						class="text-sky-500 underline hover:text-sky-700"
+						><h3 class="text-xl font-semibold">
+							Change password
+						</h3></a
 					>
-						<tr class="flex w-full mb-4">
-							<td class="p-4 w-1/4">name</td>
-							<td class="p-4 w-1/4">email</td>
-							<td class="p-4 w-1/4">1</td>
-							<td class="p-4 w-1/4">2024-04-05</td>
-						</tr>
-					</tbody>
-				</table>
+				</div>
+				<div class="mt-5">
+					<button
+						class="flex gap-2.5 items-center py-1.5 text-slate-50 bg-sky-500 rounded-lg px-3.5 transition ease-in-out hover:bg-sky-700 hover:text-slate-200"
+					>
+						<i
+							class="fa-solid fa-pen-to-square"
+							style="color: #ffffff"
+						></i
+						>Edit
+					</button>
+				</div>
 			</div>
 		</main>
 
@@ -85,5 +99,4 @@
 		src="https://kit.fontawesome.com/120f5ae848.js"
 		crossorigin="anonymous"
 	></script>
-	<script src="admin.js"></script>
 </html>

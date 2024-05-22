@@ -22,15 +22,21 @@
 					src="../MEDIA/LOGO3.png"
 					alt="Social Network logo"
 			/></a>
+
+			<ul class="flex flex-row gap-5 divide-x">
+				<li class="underline">Home</li></a>
+				<a href="./profile.html"><li class="pl-3 ">Profile</li></a>
+				<a href="./myposts.html"><li class="pl-3">My posts</li></a>
+				<a href="./myfollows.html"><li class="pl-3">My follows</li></a>
+			</ul>
+
 			<div class="w-fit gap-8 flex flex-row justify-between">
-				<a href="../INDEX/index.html"
-					><button
-						onclick="handleDisconnect()"
-						class="flex gap-2.5 items-center py-1.5 bg-red-700 rounded-lg px-3.5 transition ease-in-out hover:bg-slate-50 hover:text-slate-950"
-					>
-						<i class="fa-solid fa-user-slash"></i>Disconnect
-					</button></a
+				<button
+					onclick="handleDisconnect()"
+					class="flex gap-2.5 items-center py-1.5 bg-red-700 rounded-lg px-3.5 transition ease-in-out hover:bg-slate-50 hover:text-slate-950"
 				>
+					<i class="fa-solid fa-user-slash"></i>Disconnect
+				</button>
 			</div>
 		</header>
 
