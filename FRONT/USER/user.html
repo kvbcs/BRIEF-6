@@ -16,13 +16,15 @@
 		<header
 			class="flex flex-row justify-between items-center h-24 bg-slate-950 text-white px-8"
 		>
-			<a href="../INDEX/index.html">
+			<!-- Logo du site -------------------------------------------------------------------------------------------------->
+			<a href="./user.html">
 				<img
 					class="h-16"
 					src="../MEDIA/LOGO3.png"
 					alt="Social Network logo"
 			/></a>
 
+			<!-- Menu de navigation -------------------------------------------------------------------------------------------->
 			<ul class="flex flex-row gap-5 divide-x">
 				<li class="underline">Home</li>
 				<a href="./profile.html"><li class="pl-3">Profile</li></a>
@@ -30,6 +32,7 @@
 				<a href="./myfollows.html"><li class="pl-3">My follows</li></a>
 			</ul>
 
+			<!-- Barre de recherche ---------------------------------------------------------------------------------------------->
 			<div class="w-fit gap-8 flex flex-row justify-between">
 				<div class="w-fit">
 					<input
@@ -57,123 +60,90 @@
 		>
 			<div class="w-full flex flew-row justify-center">
 				<button
-					class="bg-sky-500 p-2.5 rounded-lg text-white hover:bg-sky-700 h-24 w-56"
+					onclick="handleCreatePost()"
+					class="bg-sky-500 p-2.5 rounded-lg text-white hover:bg-sky-700 h-24 w-56 createPost"
 				>
 					<h1 class="text-xl font-bold">Create a post !</h1>
 				</button>
 			</div>
 			<div
-				class="absolute h-full w-full bg-slate-950 opacity-95 z-10 left-0"
+				class="absolute h-full w-full bg-slate-950 opacity-95 z-10 left-0 hidden postModal"
 			>
-				<div class="fixed top-32 left-2/3 w-1/2">
-					<div
-						class="items-center flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-sm"
-					>
-						<img
-							class="pl-4 mx-auto h-16 w-auto"
-							src="../MEDIA/register.png"
-							alt="Social Network logo"
-						/>
-						<h1 class="mt-5 text-2xl font-bold text-slate-50">
-							Create a post
-						</h1>
-					</div>
-
-					<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-						<div class="space-y-6">
-							<div>
-								<label
-									for="username"
-									class="block text-sm font-medium leading-6 text-slate-50"
-									>Username</label
-								>
-								<div class="mt-2">
-									<input
-										id="username"
-										name="username"
-										type="text"
-										required
-										placeholder="Enter a valid username..."
-										class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-									/>
-								</div>
-							</div>
-							<div>
-								<label
-									for="photo"
-									class="block text-sm font-medium leading-6 text-slate-50"
-									>Avatar</label
-								>
-								<div class="mt-2">
-									<input
-										id="photo"
-										name="photo"
-										type="file"
-										required
-										class="px-2.5 bg-slate-50 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-										placeholder="Choose a file..."
-									/>
-								</div>
-							</div>
-							<div>
-								<label
-									for="email"
-									class="block text-sm font-medium leading-6 text-slate-50"
-									>Email</label
-								>
-								<div class="mt-2">
-									<input
-										id="email"
-										name="email"
-										type="email"
-										autocomplete="email"
-										required
-										placeholder="Enter a valid email address..."
-										class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-									/>
-								</div>
-							</div>
-
-							<div>
-								<div class="flex items-center justify-between">
-									<label
-										for="password"
-										class="text-slate-50 block text-sm font-medium leading-6 text-gray-900"
-										>Password</label
-									>
-								</div>
-								<div class="mt-2">
-									<input
-										id="password"
-										name="password"
-										type="password"
-										autocomplete="current-password"
-										required
-										placeholder="Enter a valid password..."
-										class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-									/>
-								</div>
-							</div>
-
-							<div>
-								<button
-									type="submit"
-									onclick="handleRegister()"
-									class="flex w-full justify-center rounded-md bg-sky-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-								>
-									Submit
-								</button>
-							</div>
+				<div
+					class="flex flex-col items-center justify-center w-full h-dvh"
+				>
+					<div class="w-1/2 fixed">
+						<div
+							class="items-center flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-sm"
+						>
+							<i
+								class="fa-solid fa-paper-plane fa-bounce fa-2xl"
+								style="color: #ffffff"
+							></i>
+							<h1 class="mt-5 text-2xl font-bold text-slate-50">
+								Create a post
+							</h1>
 						</div>
 
-						<p class="mt-10 text-center text-sm text-slate-50">
-							Already a member?
-							<a
-								href="../AUTH/login.html"
-								class="font-semibold leading-6 text-sky-400 hover:text-sky-600"
-								>Log in</a
-							>
-						</p>
+						<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+							<div class="space-y-6">
+								<div>
+									<label
+										for="title"
+										class="block text-sm font-medium leading-6 text-slate-50"
+										>Title</label
+									>
+									<div class="mt-2">
+										<input
+											id="title"
+											name="title"
+											type="text"
+											required
+											placeholder="Enter your title..."
+											class="px-2.5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+										/>
+									</div>
+								</div>
+
+								<div>
+									<label
+										for="text"
+										class="block text-sm font-medium leading-6 text-slate-50"
+										>Message</label
+									>
+									<div class="mt-2">
+										<input
+											id="text"
+											name="text"
+											type="text"
+											autocomplete
+											required
+											placeholder="Enter your message..."
+											class="px-2.5 block h-32 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+										/>
+									</div>
+								</div>
+
+								<div>
+									<button
+										type="submit"
+										onclick="createListing()"
+										class="flex w-full justify-center rounded-md bg-sky-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+									>
+										Submit
+									</button>
+								</div>
+							</div>
+
+							<p class="mt-10 text-center text-sm text-slate-50">
+								<button
+									class="text-sky-500 font-bold hover:text-sky-300"
+									onclick="removeModal()"
+								>
+									Cancel
+								</button>
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>

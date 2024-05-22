@@ -2,8 +2,7 @@ let main = document.querySelector("main");
 let jwt = window.sessionStorage.getItem("jwt");
 let role = window.sessionStorage.getItem("role");
 let followBtn = document.querySelectorAll(".followBtn");
-
-function follow() {}
+let createPost = document.querySelector(".createPost");
 
 async function getAllListings() {
 	let apiCall = await fetch("http://localhost:7000/listing/all");
@@ -161,4 +160,47 @@ function handleDisconnect() {
 	setTimeout(() => {
 		window.location.href = "../INDEX/index.html";
 	}, 1000);
+}
+
+function handleCreatePost() {
+	let postModal = document.querySelector(".postModal");
+	postModal.classList.remove("hidden");
+}
+
+async function createListing() {
+	let title = document.querySelector("#title").value;
+	let text = document.querySelector("#text").value;
+	let id_user = jwt.id_user;
+	let like_number = 0;
+
+	let listing = {
+		title: title,
+		text: text,
+		like_number: like_number,
+		id_user: id_user,
+	};
+
+	let request = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+		},
+		body: JSON.stringify(listing),
+	};
+
+	let apiRequest = fetch("http://localhost:7000/listing/create", request);
+	let response = await apiRequest;
+	console.log(response);
+	if (response.status === 200) {
+		console.log(response);
+		alert("Listing created successfully");
+		window.location.reload();
+	} else {
+		console.log(response);
+		alert("Something went wrong...");
+	}
+}
+function removeModal() {
+	let postModal = document.querySelector(".postModal");
+	postModal.classList.add("hidden");
 }
