@@ -3,14 +3,15 @@ let jwt = window.sessionStorage.getItem("jwt");
 let role = window.sessionStorage.getItem("role");
 let followBtn = document.querySelectorAll(".followBtn");
 let createPost = document.querySelector(".createPost");
+let likeNumber = document.querySelectorAll(".likeNumber");
 
 async function getAllListings() {
 	let apiCall = await fetch("http://localhost:7000/listing/all");
 	let response = await apiCall.json();
 	console.log(response);
 
-	// onclick="likeContent('${listing._id}')
-	//TODO: faire un bouton qui recup l'id, vire tout le component
+	//
+	//TODO: faire un bouton qui recup l'id
 
 	response.forEach((listing) => {
 		main.innerHTML += `
@@ -59,14 +60,16 @@ async function getAllListings() {
 									class="flex cursor-pointer items-center transition hover:text-slate-600"
 								>
 									<div class="divide-x flex flex-row w-48 max-w-fit justify-between items-center">
-										<button 
+										<button
 											class="min-w-32 max-w-fit text-white bg-green-700 border-2 rounded-lg p-2"
+											onclick="likeContent('${listing._id}')"
 										>
 											<i class="fa-solid fa-thumbs-up" style="color: #ffffff;"></i>
-												<span>${listing.like_number}</span>
+												<span class="likeNumber">${listing.like_number}</span>
 										</button>
 										<button 
 											class="min-w-32 max-w-fit text-white bg-red-600 border-4 rounded-lg p-2"
+											onclick="dislikeContent('${listing._id}')"
 										>
 											<i class="fa-solid fa-thumbs-down" style="color: #ffffff;"></i>
 												<span>${listing.dislike_number}</span>
@@ -140,4 +143,12 @@ function removeModal() {
 
 async function likeContent(id) {
 	console.log(id);
+	likeNumber.forEach = Number(0);
+	likeNumber.innerText += 1;
+	console.log(likeNumber);
+}
+async function dislikeContent(id) {
+	console.log(id);
+	let dislike = Number(0);
+	dislike.innerText += 1;
 }
