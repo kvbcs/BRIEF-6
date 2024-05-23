@@ -3,15 +3,12 @@ let jwt = window.sessionStorage.getItem("jwt");
 let role = window.sessionStorage.getItem("role");
 let followBtn = document.querySelectorAll(".followBtn");
 let createPost = document.querySelector(".createPost");
-let likeNumber = document.querySelectorAll(".likeNumber");
+let likeNumber = document.querySelectorAll(".likeNumber").value;
 
 async function getAllListings() {
 	let apiCall = await fetch("http://localhost:7000/listing/all");
 	let response = await apiCall.json();
 	console.log(response);
-
-	//
-	//TODO: faire un bouton qui recup l'id
 
 	response.forEach((listing) => {
 		main.innerHTML += `
@@ -143,12 +140,60 @@ function removeModal() {
 
 async function likeContent(id) {
 	console.log(id);
-	likeNumber.forEach = Number(0);
-	likeNumber.innerText += 1;
-	console.log(likeNumber);
+
+	try {
+		let request = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+				Authorization: `Bearer ${jwt}`,
+			},
+			// body: JSON.stringify(id),
+		};
+		let apiRequest = await fetch(
+			`http://localhost:7000/listing/like/${id}`,
+			request
+		);
+		let response = await apiRequest.json();
+		console.log(response, apiRequest);
+		// const xhttp = new XMLHttpRequest();
+		// xhttp.onload = function () {
+		// 	likeNumber.innerText += 1;
+		// };
+		// xhttp.open("POST", apiRequest, true);
+		// xhttp.send();
+		// console.log(xhttp);
+	} catch (error) {
+		console.log(error.stack);
+	}
 }
+
 async function dislikeContent(id) {
 	console.log(id);
-	let dislike = Number(0);
-	dislike.innerText += 1;
+
+	try {
+		let request = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+				Authorization: `Bearer ${jwt}`,
+			},
+			// body: JSON.stringify(id),
+		};
+		let apiRequest = await fetch(
+			`http://localhost:7000/listing/dislike/${id}`,
+			request
+		);
+		let response = await apiRequest.json();
+		console.log(response, apiRequest);
+		// const xhttp = new XMLHttpRequest();
+		// xhttp.onload = function () {
+		// 	likeNumber.innerText += 1;
+		// };
+		// xhttp.open("POST", apiRequest, true);
+		// xhttp.send();
+		// console.log(xhttp);
+	} catch (error) {
+		console.log(error.stack);
+	}
 }

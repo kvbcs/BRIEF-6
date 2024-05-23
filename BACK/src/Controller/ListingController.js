@@ -184,7 +184,111 @@ const ctrlMyListings = async (req, res) => {
 	});
 };
 
+const ctrlLike = async (req, res) => {
+	let listingId = new ObjectId(req.params.id);
+	console.log(listingId);
+	const token = await extractToken(req);
+	let id_user;
+	console.log(token);
+
+	jwt.verify(token, process.env.SECRET_KEY, async (err, authData) => {
+		if (err) {
+			console.log(err.stack);
+			res.status(401).json({ err: "Unauthorized" });
+			return;
+		} else {
+			id_user = authData.id_user;
+		}
+	});
+
+	console.log(id_user);
+
+	let listing = await client
+		.db("BRIEF6")
+		.collection("listing")
+		.find({ _id: req.params.listingId });
+
+	if (!listing) {
+		res.status(401).json({ error: "Unauthorized" });
+		return;
+	}
+
+	try {
+		let result = await client
+			.db("BRIEF6")
+			.collection("listing")
+			.updateOne(
+				{ _id: listingId },
+				{
+					$inc: { like_number: +1 },
+				}
+			);
+		if (result.modifiedCount === 0) {
+			res.status(400).json({ Error: "Like not updated" });
+		} else {
+			console.log(result);
+			res.status(200).json({ Success: "Like updated" });
+		}
+	} catch (e) {
+		console.log(e.stack);
+		res.status(500).json({ Error: "Server error" });
+	}
+};
+
+const ctrlDislike = async (req, res) => {
+	let listingId = new ObjectId(req.params.id);
+	console.log(listingId);
+	const token = await extractToken(req);
+	let id_user;
+	console.log(token);
+
+	jwt.verify(token, process.env.SECRET_KEY, async (err, authData) => {
+		if (err) {
+			console.log(err.stack);
+			res.status(401).json({ err: "Unauthorized" });
+			return;
+		} else {
+			id_user = authData.id_user;
+		}
+	});
+
+	console.log(id_user);
+
+	let listing = await client
+		.db("BRIEF6")
+		.collection("listing")
+		.find({ _id: req.params.listingId });
+
+	if (!listing) {
+		res.status(401).json({ error: "Unauthorized" });
+		return;
+	}
+
+	try {
+		let result = await client
+			.db("BRIEF6")
+			.collection("listing")
+			.updateOne(
+				{ _id: listingId },
+				{
+					$inc: { dislike_number: +1 },
+				}
+			);
+		if (result.modifiedCount === 0) {
+			res.status(400).json({ Error: "Dislike not updated" });
+		} else {
+			console.log(result);
+			res.status(200).json({ Success: "Dislike updated" });
+		}
+	} catch (e) {
+		console.log(e.stack);
+		res.status(500).json({ Error: "Server error" });
+	}
+};
+
 module.exports = {
+	ctrlDislike,
+	ctrlLike,
 	ctrlCreateListing,
 	ctrlAllListings,
 	ctrlDeleteListing,
