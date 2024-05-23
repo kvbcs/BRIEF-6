@@ -14,6 +14,8 @@ const ctrlCreateListing = async (req, res) => {
 	}
 	const token = await extractToken(req);
 	let id_user;
+	let name;
+	let photo;
 	console.log(token);
 
 	jwt.verify(token, process.env.SECRET_KEY, async (err, authData) => {
@@ -23,12 +25,25 @@ const ctrlCreateListing = async (req, res) => {
 			return;
 		} else {
 			id_user = authData.id_user;
+			name = authData.name;
+			photo = authData.photo;
 		}
 	});
 
-	console.log(id_user);
+	console.log(id_user, name, photo);
 	try {
-		let newListing = new Listing(req.body.title, req.body.text, 0, id_user);
+		let newListing = new Listing(
+			req.body.title,
+			req.body.text,
+			0,
+			0,
+			0,
+			id_user,
+			photo,
+			name,
+			new Date()
+		);
+		console.log(newListing);
 		let result = await client
 			.db("BRIEF6")
 			.collection("listing")
@@ -149,9 +164,30 @@ const ctrlUpdateListing = async (req, res) => {
 	}
 };
 
+const ctrlMyListings = async (req, res) => {
+	const token = await extractToken(req);
+
+	jwt.verify(token, process.env.SECRET_KEY, async (err, authData) => {
+		if (err) {
+			console.log(err);
+			res.status(401).json({ err: "Unauthorized" });
+			return;
+		} else {
+			let listings = await client
+				.db("BRIEF6")
+				.collection("listing")
+				.find({ id_user: authData.id_user });
+			let apiResponse = await listings.toArray();
+
+			res.status(200).json(apiResponse);
+		}
+	});
+};
+
 module.exports = {
 	ctrlCreateListing,
 	ctrlAllListings,
 	ctrlDeleteListing,
 	ctrlUpdateListing,
+	ctrlMyListings,
 };

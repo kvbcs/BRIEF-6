@@ -202,6 +202,8 @@ const ctrlLogin = async (req, res) => {
 				const token = jwt.sign(
 					{
 						id_user: rows[0].id_user,
+						name: rows[0].name,
+						photo: rows[0].photo,
 						email: rows[0].email,
 					},
 					process.env.SECRET_KEY,
