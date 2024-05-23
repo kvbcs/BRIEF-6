@@ -24,7 +24,7 @@ async function handleRegister() {
 
 	console.log(response);
 	if (response.status === 200) {
-		// window.location.href = "./login.html";
+		window.location.href = "./login.html";
 	} else {
 		alert("Invalid credentials");
 	}
@@ -78,7 +78,7 @@ async function handlePhoto() {
 	let request = {
 		method: "POST",
 
-		body: photo,
+		body: formData,
 	};
 	console.log(photo);
 

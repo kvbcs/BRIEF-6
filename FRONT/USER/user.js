@@ -186,13 +186,6 @@ async function dislikeContent(id) {
 		);
 		let response = await apiRequest.json();
 		console.log(response, apiRequest);
-		// const xhttp = new XMLHttpRequest();
-		// xhttp.onload = function () {
-		// 	likeNumber.innerText += 1;
-		// };
-		// xhttp.open("POST", apiRequest, true);
-		// xhttp.send();
-		// console.log(xhttp);
 	} catch (error) {
 		console.log(error.stack);
 	}

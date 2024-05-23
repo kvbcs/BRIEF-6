@@ -6,6 +6,7 @@ const uploadDirectory = path.join(__dirname, "Uploads");
 console.log(uploadDirectory, "ici");
 //Fonction pour insérer une image
 const insertPhoto = async (req, res) => {
+	console.log(req.body);
 	//Variable contenant nom des images
 	let newFileName;
 
