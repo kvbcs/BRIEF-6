@@ -3,7 +3,8 @@ async function handleRegister() {
 	let photo = document.querySelector("#photo").value;
 	let email = document.querySelector("#email").value;
 	let password = document.querySelector("#password").value;
-
+	event.PreventDefault;
+	handlePhoto();
 	let user = {
 		name: name,
 		photo: photo,
@@ -23,7 +24,7 @@ async function handleRegister() {
 
 	console.log(response);
 	if (response.status === 200) {
-		window.location.href = "./login.html";
+		// window.location.href = "./login.html";
 	} else {
 		alert("Invalid credentials");
 	}
@@ -62,5 +63,32 @@ async function handleLogin() {
 		}
 	} else {
 		alert("Invalid credentials");
+	}
+}
+
+let photo = document.querySelector("#photo");
+console.log(photo);
+async function handlePhoto() {
+	console.log("allo");
+	const image = photo.files[0];
+
+	const formData = new FormData();
+	formData.append("photo", photo.files[0]);
+	console.log(image, formData);
+	let request = {
+		method: "POST",
+
+		body: photo,
+	};
+	console.log(photo);
+
+	let apiRequest = await fetch("http://localhost:7000/user/photo", request);
+	let response = await apiRequest;
+	const data = await apiRequest.json();
+	console.log(data);
+	if (response.status === 200) {
+		console.log(response);
+	} else {
+		alert("Invalid photo");
 	}
 }

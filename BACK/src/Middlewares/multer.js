@@ -3,7 +3,7 @@ const path = require("path");
 
 //Constante de destination du dossier qui recevra les photos
 const uploadDirectory = path.join(__dirname, "Uploads");
-
+console.log(uploadDirectory, "ici");
 //Fonction pour insérer une image
 const insertPhoto = async (req, res) => {
 	//Variable contenant nom des images
