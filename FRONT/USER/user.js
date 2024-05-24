@@ -64,7 +64,7 @@ async function getAllListings() {
 											onclick="likeContent('${listing._id}')"
 										>
 											<i class="fa-solid fa-thumbs-up" style="color: #ffffff;"></i>
-												<span class="likeNumber">${listing.like_number}</span>
+												<span class="likeNumber('${listing._id}')">${listing.like_number}</span>
 										</button>
 										<button 
 											class="min-w-32 max-w-fit text-white bg-red-600 hover:bg-red-800 rounded-lg p-2"
@@ -106,7 +106,7 @@ async function getAllComments(id) {
 
 	response.forEach((comment) => {
 		aside.innerHTML += `
-				<article class="border-2 border-sky-500 min-h-40 max-h-fit rounded-xl p-5 shadow-md w-11/12 bg-white">
+				<article class="border-2 border-sky-500 min-h-32 max-h-fit rounded-xl p-5 shadow-md w-11/12 bg-white">
 					<div
 						class="flex w-full items-center justify-between border-b pb-3"
 					>
@@ -214,14 +214,12 @@ async function likeContent(id) {
 			request
 		);
 		let response = await apiRequest.json();
-		console.log(response, apiRequest);
-		// const xhttp = new XMLHttpRequest();
-		// xhttp.onload = function () {
-		// 	likeNumber.innerText += 1;
-		// };
-		// xhttp.open("POST", apiRequest, true);
-		// xhttp.send();
-		// console.log(xhttp);
+		if (response === 200) {
+			let spanLike = document.querySelector(`.likeNumber('${id}')`);
+			console.log(spanLike);
+			spanLike.innerText += 1;
+			console.log(response, apiRequest);
+		}
 	} catch (error) {
 		console.log(error.stack);
 	}

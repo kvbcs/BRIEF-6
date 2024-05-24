@@ -89,7 +89,6 @@ async function handlePhoto() {
 
 		body: formData,
 	};
-	console.log(photo);
 
 	let apiRequest = await fetch("http://localhost:7000/user/photo", request);
 	let response = await apiRequest;
