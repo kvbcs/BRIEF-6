@@ -12,8 +12,8 @@ async function getAllListings() {
 
 	response.forEach((listing) => {
 		main.innerHTML += `
-			<div class="flex items-center justify-center min-h-fit max-h-52">
-				<div class="rounded-xl border p-5 shadow-md w-9/12 bg-white">
+			<div class="flex items-center justify-center min-h-fit max-h-72">
+				<article class="border-2 border-sky-500 rounded-xl border p-5 shadow-md w-9/12 bg-white">
 					<div
 						class="flex w-full items-center justify-between border-b pb-3"
 					>
@@ -44,15 +44,15 @@ async function getAllListings() {
 						</div>
 					</div>
 
-					<div>
+					
 						<div class="flex items-center justify-between text-slate-500">
 							<div class="flex space-x-4 md:space-x-8">
-								<div
+								<button onclick="showComments()"
 									class="flex gap-2.5 cursor-pointer items-center transition hover:text-slate-800"
 								>
 									<i class="fa-solid fa-comment"></i>
 									<span>${listing.comment_number}</span>
-								</div>
+								</button>
 								<div
 									class="flex cursor-pointer items-center transition hover:text-slate-600"
 								>
@@ -77,14 +77,42 @@ async function getAllListings() {
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+							<aside 
+							class="flex flex-col gap-8 pt-14 pb-14 items-center justify-center bg-slate-900 w-full min-h-fit max-h-64 overflow-x-auto rounded-md hidden"
+							>
+							</aside>
+				</article>
 			</div>
 	`;
 	});
 }
 
 getAllListings();
+
+async function getAllComments() {
+	let aside = document.querySelector("aside");
+	let apiCall = await fetch("http://localhost:7000/comment/all");
+	let response = await apiCall.json();
+	console.log(response);
+
+	response.forEach((comment) => {
+		aside.innerHTML += `
+		<div class="bg-slate-50 min h-32 w-11/12 rounded-lg">
+			<img class="rounded-full w-32 border-2 border-sky-500"
+				src="${comment.photo}">
+			</img>
+				<h2>${comment.username}</h2>
+					<p>${comment.message}</p>
+		</div>
+		`;
+	});
+}
+
+async function showComments() {
+	let aside = document.querySelector("aside");
+	aside.classList.toggle("hidden");
+	getAllComments();
+}
 
 function handleDisconnect() {
 	window.sessionStorage.clear(jwt);
