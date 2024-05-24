@@ -16,6 +16,7 @@ const ctrlCreateComment = async (req, res) => {
 	const token = await extractToken(req);
 	let id_user;
 	let photo;
+	let name;
 	console.log(token);
 
 	jwt.verify(token, process.env.SECRET_KEY, async (err, authData) => {
@@ -26,13 +27,20 @@ const ctrlCreateComment = async (req, res) => {
 		} else {
 			id_user = authData.id_user;
 			photo = authData.photo;
+			name = authData.name;
 		}
 	});
 
-	console.log(id_user, photo);
+	console.log(id_user, photo, name);
 	let id_listing = req.params.id;
 	try {
-		let newComment = new Comment(req.body.message, id_listing, id_user, photo);
+		let newComment = new Comment(
+			req.body.message,
+			id_listing,
+			id_user,
+			photo,
+			name
+		);
 		let result = await client
 			.db("BRIEF6")
 			.collection("comment")

@@ -12,7 +12,7 @@ async function getAllListings() {
 
 	response.forEach((listing) => {
 		main.innerHTML += `
-			<div class="flex items-center justify-center min-h-fit max-h-72">
+			<div class="flex items-center justify-center min-h-fit max-h-72 mb-24">
 				<article class="border-2 border-sky-500 rounded-xl border p-5 shadow-md w-9/12 bg-white">
 					<div
 						class="flex w-full items-center justify-between border-b pb-3"
@@ -47,7 +47,7 @@ async function getAllListings() {
 					
 						<div class="flex items-center justify-between text-slate-500">
 							<div class="flex space-x-4 md:space-x-8">
-								<button onclick="showComments()"
+								<button onclick="showComments('${listing._id}')"
 									class="flex gap-2.5 cursor-pointer items-center transition hover:text-slate-800"
 								>
 									<i class="fa-solid fa-comment"></i>
@@ -78,8 +78,17 @@ async function getAllListings() {
 							</div>
 						</div>
 							<aside 
-							class="flex flex-col gap-8 pt-14 pb-14 items-center justify-center bg-slate-900 w-full min-h-fit max-h-64 overflow-x-auto rounded-md hidden"
+							class="aside${listing._id} flex flex-col gap-8 pt-96 pb-14 mt-10 items-center justify-center bg-slate-900 w-full min-h-fit max-h-64 overflow-x-auto rounded-md hidden"
 							>
+								<h2 class="text-white m-10"> Loading Comments </h2>
+									<div class="w-full flex flew-row justify-center">
+										<button
+											onclick=""
+											class="bg-sky-500 p-2.5 rounded-lg text-white hover:bg-sky-700 h-fit w-56"
+										>
+											<h1 class="text-xl font-bold">Write a comment !</h1>
+										</button>
+									</div>
 							</aside>
 				</article>
 			</div>
@@ -89,29 +98,51 @@ async function getAllListings() {
 
 getAllListings();
 
-async function getAllComments() {
-	let aside = document.querySelector("aside");
+async function getAllComments(id) {
+	let aside = document.querySelector(`.aside${id}`);
 	let apiCall = await fetch("http://localhost:7000/comment/all");
 	let response = await apiCall.json();
 	console.log(response);
 
 	response.forEach((comment) => {
 		aside.innerHTML += `
-		<div class="bg-slate-50 min h-32 w-11/12 rounded-lg">
-			<img class="rounded-full w-32 border-2 border-sky-500"
-				src="${comment.photo}">
-			</img>
-				<h2>${comment.username}</h2>
-					<p>${comment.message}</p>
-		</div>
+				<article class="border-2 border-sky-500 min-h-40 max-h-fit rounded-xl p-5 shadow-md w-11/12 bg-white">
+					<div
+						class="flex w-full items-center justify-between border-b pb-3"
+					>
+						<div class="flex items-center space-x-3">
+							<img
+							src="${comment.photo}"
+								class="h-16 w-16 rounded-full bg-slate-400"
+							>
+							<div class="text-lg font-bold text-slate-700">
+								${comment.name}
+							</div>
+						</div>
+						<div class="flex items-center space-x-8">
+							<button
+								class="bg-sky-500 text-white px-2.5 py-1.5 rounded-md followBtn"
+							>
+								<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Follow
+							</button>
+						</div>
+					</div>
+
+					<div class="mt-4 mb-6">
+						<div class="text-sm text-neutral-600">
+							${comment.message}
+						</div>
+					</div>
+				</article>
 		`;
 	});
 }
 
-async function showComments() {
-	let aside = document.querySelector("aside");
+async function showComments(id) {
+	console.log(id);
+	let aside = document.querySelector(`.aside${id}`);
 	aside.classList.toggle("hidden");
-	getAllComments();
+	getAllComments(id);
 }
 
 function handleDisconnect() {
