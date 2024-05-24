@@ -214,12 +214,8 @@ async function likeContent(id) {
 			request
 		);
 		let response = await apiRequest.json();
-		if (response === 200) {
-			let spanLike = document.querySelector(`.likeNumber('${id}')`);
-			console.log(spanLike);
-			spanLike.innerText += 1;
-			console.log(response, apiRequest);
-		}
+
+		console.log(response, apiRequest);
 	} catch (error) {
 		console.log(error.stack);
 	}
