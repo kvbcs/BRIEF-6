@@ -3,8 +3,12 @@ async function handleRegister() {
 	let photo = document.querySelector("#photo").value;
 	let email = document.querySelector("#email").value;
 	let password = document.querySelector("#password").value;
+	let postModal = document.querySelector(".postModal");
+
 	event.PreventDefault;
+
 	handlePhoto();
+
 	let user = {
 		name: name,
 		photo: photo,
@@ -24,10 +28,15 @@ async function handleRegister() {
 
 	console.log(response);
 	if (response.status === 200) {
-		window.location.href = "./login.html";
+		postModal.classList.remove("hidden");
 	} else {
 		alert("Invalid credentials");
 	}
+}
+
+function removeModal() {
+	let postModal = document.querySelector(".postModal");
+	postModal.classList.add("hidden");
 }
 
 async function handleLogin() {
@@ -90,5 +99,40 @@ async function handlePhoto() {
 		console.log(response);
 	} else {
 		alert("Invalid photo");
+	}
+}
+
+function passwordModal() {
+	let postModal = document.querySelector(".postModal");
+	postModal.classList.remove("hidden");
+}
+
+async function resetPassword() {
+	let password = document.querySelector("#resetPass").value;
+	let email = document.querySelector("#resetEmail").value;
+	let name = document.querySelector("#resetName").value;
+
+	let user = {
+		name: name,
+		email: email,
+		new_password: password,
+	};
+	let request = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+		},
+		body: JSON.stringify(user),
+	};
+
+	let apiRequest = await fetch("http://localhost:7000/user/reset", request);
+	let response = await apiRequest;
+	let truc = response.json();
+
+	console.log(response, truc);
+	if (response.status === 200) {
+		alert("reset success");
+	} else {
+		alert("reset fail");
 	}
 }

@@ -28,9 +28,11 @@ async function getAllListings() {
 						</div>
 						<div class="flex items-center space-x-8">
 							<button
+								onclick="follow('${listing._id}')"
 								class="bg-sky-500 text-white px-2.5 py-1.5 rounded-md followBtn"
 							>
-								<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Follow
+								<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> 
+								<span class="followText">Follow</span>
 							</button>
 						</div>
 					</div>
@@ -56,39 +58,37 @@ async function getAllListings() {
 								<div
 									class="flex cursor-pointer items-center transition hover:text-slate-600"
 								>
-									<div class="divide-x flex flex-row w-48 max-w-fit justify-between items-center">
+									<div class="divide-x flex flex-row gap-3.5 w-48 max-w-fit justify-between items-center">
 										<button
-											class="min-w-32 max-w-fit text-white bg-green-700 border-2 rounded-lg p-2"
+											class="min-w-32 max-w-fit text-white bg-green-700 hover:bg-green-900 rounded-lg p-2"
 											onclick="likeContent('${listing._id}')"
 										>
 											<i class="fa-solid fa-thumbs-up" style="color: #ffffff;"></i>
 												<span class="likeNumber">${listing.like_number}</span>
 										</button>
 										<button 
-											class="min-w-32 max-w-fit text-white bg-red-600 border-4 rounded-lg p-2"
+											class="min-w-32 max-w-fit text-white bg-red-600 hover:bg-red-800 rounded-lg p-2"
 											onclick="dislikeContent('${listing._id}')"
 										>
 											<i class="fa-solid fa-thumbs-down" style="color: #ffffff;"></i>
 												<span>${listing.dislike_number}</span>
 
 										</button>
-
+										<button 
+											class="min-w-32 max-w-fit text-white bg-sky-500 hover:bg-sky-700 rounded-lg p-2"
+											onclick="createComment('${listing._id}')"
+										>
+											<i class="fa-solid fa-comment-dots" style="color: #ffffff;"></i>
+												<span>Comment</span>
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 							<aside 
-							class="aside${listing._id} flex flex-col gap-8 pt-96 pb-14 mt-10 items-center justify-center bg-slate-900 w-full min-h-fit max-h-64 overflow-x-auto rounded-md hidden"
+							class="aside${listing._id} flex flex-col gap-8 pt-6 pb-14 mt-10 items-center justify-center bg-slate-900 w-full min-h-fit h-96 overflow-x-auto rounded-md hidden"
 							>
 								<h2 class="text-white m-10"> Loading Comments </h2>
-									<div class="w-full flex flew-row justify-center">
-										<button
-											onclick=""
-											class="bg-sky-500 p-2.5 rounded-lg text-white hover:bg-sky-700 h-fit w-56"
-										>
-											<h1 class="text-xl font-bold">Write a comment !</h1>
-										</button>
-									</div>
 							</aside>
 				</article>
 			</div>
@@ -248,4 +248,15 @@ async function dislikeContent(id) {
 	} catch (error) {
 		console.log(error.stack);
 	}
+}
+
+function createComment(id) {
+	console.log(id);
+	let postModal = document.querySelector(".postModal");
+	postModal.classList.remove("hidden");
+}
+
+function follow(id) {
+	console.log(id);
+	followText.innerText = "Followed";
 }
