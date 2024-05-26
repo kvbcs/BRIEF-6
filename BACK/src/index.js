@@ -26,7 +26,7 @@ app.use("/user", userRouter);
 app.use("/listing", listingRouter);
 app.use("/comment", commentRouter);
 
-//Activation du port
+//Activation du serveur sur le port
 app.listen(process.env.PORT, () => {
 	console.log("Server is running on PORT", process.env.PORT);
 });

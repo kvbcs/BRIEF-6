@@ -4,11 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Social Network</title>
-		<link rel="stylesheet" href="../CSS/main.css" />
-		<link rel="stylesheet" href="../CSS/like.css" />
+		<link rel="stylesheet" href="../../CSS/main.css" />
+		<link rel="stylesheet" href="../../CSS/like.css" />
 		<link
 			rel="shortcut icon"
-			href="../MEDIA/favicon-32x32.png"
+			href="../../MEDIA/favicon-32x32.png"
 			type="image/x-icon"
 		/>
 	</head>
@@ -16,18 +16,22 @@
 		<header
 			class="flex flex-row justify-between items-center h-24 bg-slate-950 text-white px-8"
 		>
-			<a href="../INDEX/index.html">
+			<a href="../../USER/HOME/user.html">
 				<img
 					class="h-16"
-					src="../MEDIA/LOGO3.png"
+					src="../../MEDIA/LOGO3.png"
 					alt="Social Network logo"
 			/></a>
 
 			<ul class="flex flex-row gap-5 divide-x">
-				<a href="./user.html"><li class="">Home</li></a>
-				<a href="./profile.html"><li class="pl-3">Profile</li></a>
+				<a href="../HOME/user.html"><li class="">Home</li></a>
+				<a href="../PROFILE/profile.html"
+					><li class="pl-3">Profile</li></a
+				>
 				<li class="pl-3 underline">My posts</li>
-				<a href="./myfollows.html"><li class="pl-3">My follows</li></a>
+				<a href="../MY_FOLLOWS/myfollows.html"
+					><li class="pl-3">My follows</li></a
+				>
 			</ul>
 
 			<div class="w-fit gap-8 flex flex-row justify-between">
@@ -50,7 +54,7 @@
 					>
 						<div class="flex items-center space-x-3">
 							<img
-								src="../MEDIA/login.png"
+								src="../../MEDIA/login.png"
 								class="h-16 w-16 rounded-full bg-slate-400"
 							/>
 							<div class="text-lg font-bold text-slate-700">
@@ -102,5 +106,5 @@
 		src="https://kit.fontawesome.com/120f5ae848.js"
 		crossorigin="anonymous"
 	></script>
-	<script src="myposts.js"></script>
+	<script src="./myposts.js"></script>
 </html>

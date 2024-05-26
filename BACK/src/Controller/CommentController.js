@@ -7,32 +7,41 @@ const { extractToken } = require("../Utils/extractToken");
 const { Comment } = require("../Model/Comment");
 require("dotenv").config();
 
-//Fonction pour créer une publication
+//Fonction pour créer un commentaire --------------------------------------------------------------------------------------------
 const ctrlCreateComment = async (req, res) => {
+	//Vérification que le champ est rempli
 	if (!req.body.message) {
 		res.status(400).send("Missing field");
 		return;
 	}
+
 	const token = await extractToken(req);
+	console.log(token);
+
 	let id_user;
 	let photo;
 	let name;
-	console.log(token);
 
+	//Vérification du jwt
 	jwt.verify(token, process.env.SECRET_KEY, async (err, authData) => {
+		//Si négatif, message d'erreur
 		if (err) {
 			console.log(err.stack);
 			res.status(401).json({ err: "Unauthorized" });
 			return;
+
+			//Sinon, on autorise l'user
 		} else {
 			id_user = authData.id_user;
 			photo = authData.photo;
 			name = authData.name;
 		}
+		console.log(id_user, photo, name);
 	});
 
-	console.log(id_user, photo, name);
 	let id_listing = req.params.id;
+
+	//Création du commentaire
 	try {
 		let newComment = new Comment(
 			req.body.message,
@@ -41,32 +50,41 @@ const ctrlCreateComment = async (req, res) => {
 			photo,
 			name
 		);
+
+		//Insertion du commentaire dans la DB
 		let result = await client
 			.db("BRIEF6")
 			.collection("comment")
 			.insertOne(newComment);
+
+		//MEssage de succès
 		res.status(200).json(result);
+
+		//Message d'erreur
 	} catch (error) {
 		console.log(error.stack);
 		res.status(400).json({ Error: "Error creating comment" });
 	}
 };
 
-//Fonction pour voir tous les commentaires
+//Fonction pour voir tous les commentaires -------------------------------------------------------------------------------------------
 const ctrlAllComments = async (req, res) => {
+	//Requête pour trouver tous les commentaires
 	try {
 		let apiCall = client.db("BRIEF6").collection("comment").find();
-
 		let comments = await apiCall.toArray();
 
+		//Message de succès
 		res.status(200).json(comments);
+
+		//Message d'erreur
 	} catch (error) {
 		console.log(error.stack);
 		res.status(400).json({ Error: "Error getting all comments" });
 	}
 };
 
-//Fonction pour supprimer ses publications
+//Fonction pour supprimer ses commentaires --------------------------------------------------------------------------------------------
 const ctrlDeleteComment = async (req, res) => {
 	let commentId = new ObjectId(req.params.id);
 	console.log(commentId);
@@ -108,7 +126,7 @@ const ctrlDeleteComment = async (req, res) => {
 	}
 };
 
-//Fonction pour modifier ses publications
+//Fonction pour modifier ses commentaires -------------------------------------------------------------------------------------------
 const ctrlUpdateComment = async (req, res) => {
 	let commentId = new ObjectId(req.params.id);
 	console.log(commentId);
@@ -156,6 +174,7 @@ const ctrlUpdateComment = async (req, res) => {
 	}
 };
 
+//Exportation des modules ------------------------------------------------------------------------------------------------------------
 module.exports = {
 	ctrlCreateComment,
 	ctrlAllComments,

@@ -2,6 +2,7 @@ const { MongoClient, Db } = require("mongodb");
 
 var client = null;
 
+//Fonction de connexion à MongoDB
 function connect(url, callback) {
 	if (client === null) {
 		client = new MongoClient(url);
@@ -18,10 +19,12 @@ function connect(url, callback) {
 	}
 }
 
+//Fonction de création de base de données
 function db(dbName) {
 	return new Db(client, dbName);
 }
 
+//Fonction de fermeture de connexion
 function closeConnect() {
 	if (client) {
 		client.close();
@@ -29,4 +32,5 @@ function closeConnect() {
 	}
 }
 
+//Exportation des modules
 module.exports = { connect, db, closeConnect };

@@ -6,6 +6,7 @@ const uploadDirectory = path.join(__dirname, "Uploads");
 //Fonction pour insérer une image
 const insertPhoto = async (req, res) => {
 	console.log(req.body);
+
 	//Variable contenant nom des images
 	let newFileName;
 
@@ -28,7 +29,7 @@ const insertPhoto = async (req, res) => {
 
 	//Variable upload qui utilise la fonction multer
 	let upload = multer({
-		//Var storage qui définit dossier source et nom du fichier
+		//Var storage qui définit le dossier source et nom du fichier
 		storage: storage,
 
 		//Taille limite en utilisant la constante maxSize
@@ -50,7 +51,7 @@ const insertPhoto = async (req, res) => {
 				return cb(null, true);
 			}
 
-			//Message d'erreur si le filetype n'est pas bon
+			//Message d'erreur si le type de fichier n'est pas bon
 			cb(
 				"Error: File upload only supports the " +
 					"following filetypes - " +
@@ -58,10 +59,10 @@ const insertPhoto = async (req, res) => {
 			);
 		},
 
-		//Nom qu'on va rechercher dans la requête http (important)
+		//Nom qu'on va rechercher dans la requête http
 	}).single("photo");
 
-	//Fonction qui envoie une erreur si c'est pas bon, ou envoi nom du fichier en http si ca marche
+	//Fonction qui envoie une erreur si erreur, ou envoi le nom du fichier en http si fonctionne
 	upload(req, res, function (err) {
 		if (err) {
 			//Envoie erreur
@@ -73,4 +74,5 @@ const insertPhoto = async (req, res) => {
 	});
 };
 
+//Exportation des modules
 module.exports = { insertPhoto };

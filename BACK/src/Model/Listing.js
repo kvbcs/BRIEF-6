@@ -1,3 +1,4 @@
+//Modèle des postes
 class Listing {
 	constructor(
 		title,
@@ -22,4 +23,5 @@ class Listing {
 	}
 }
 
+//Exportation des modules
 module.exports = { Listing };

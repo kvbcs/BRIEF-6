@@ -1,6 +1,0 @@
-table follow :
-
-id_follow auto incrémenter
-id_follower = id du gars qui te suis
-id_followed = id du gars que je suis
-created at = timestamp

@@ -1,3 +1,4 @@
+//Modèle des commentaires
 class Comment {
 	constructor(message, id_listing, id_user, photo, name) {
 		this.message = message;
@@ -8,4 +9,5 @@ class Comment {
 	}
 }
 
+//Exportation des modules
 module.exports = { Comment };

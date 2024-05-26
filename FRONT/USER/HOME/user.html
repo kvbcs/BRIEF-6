@@ -4,11 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Social Network</title>
-		<link rel="stylesheet" href="../CSS/main.css" />
-		<link rel="stylesheet" href="../CSS/like.css" />
+		<link rel="stylesheet" href="../../CSS/main.css" />
+		<link rel="stylesheet" href="../../CSS/like.css" />
 		<link
 			rel="shortcut icon"
-			href="../MEDIA/favicon-32x32.png"
+			href="../../MEDIA/favicon-32x32.png"
 			type="image/x-icon"
 		/>
 	</head>
@@ -20,16 +20,22 @@
 			<a href="./user.html">
 				<img
 					class="h-16"
-					src="../MEDIA/LOGO3.png"
+					src="../../MEDIA/LOGO3.png"
 					alt="Social Network logo"
 			/></a>
 
 			<!-- Menu de navigation -------------------------------------------------------------------------------------------->
 			<ul class="flex flex-row gap-5 divide-x">
 				<li class="underline">Home</li>
-				<a href="./profile.html"><li class="pl-3">Profile</li></a>
-				<a href="./myposts.html"><li class="pl-3">My posts</li></a>
-				<a href="./myfollows.html"><li class="pl-3">My follows</li></a>
+				<a href="../PROFILE/profile.html"
+					><li class="pl-3">Profile</li></a
+				>
+				<a href="../MY_POSTS/myposts.html"
+					><li class="pl-3">My posts</li></a
+				>
+				<a href="../MY_FOLLOWS/myfollows.html"
+					><li class="pl-3">My follows</li></a
+				>
 			</ul>
 
 			<!-- Barre de recherche ---------------------------------------------------------------------------------------------->
@@ -58,9 +64,8 @@
 		<main
 			class="relative flex flex-col justify-evenly gap-40 px-6 py-12 lg:px-8 bg-slate-800 pb-64 pt-24"
 		>
-
-		<!-- Bouton création de post --------------------------------------------------------------------------------------------->
-			<div class="w-full flex flew-row justify-center mb-20">
+			<!-- Bouton création de post --------------------------------------------------------------------------------------------->
+			<div class="w-full flex flew-row justify-center">
 				<button
 					onclick="handleCreatePost()"
 					class="bg-sky-500 p-2.5 rounded-lg text-white hover:bg-sky-700 h-24 w-56 createPost"
@@ -69,7 +74,7 @@
 				</button>
 			</div>
 
-			<!-- Modal ---------------------------------------------------------------------------------------------------------->
+			<!-- Modal cachée----------------------------------------------------------------------------------------------------->
 			<div
 				class="absolute h-full w-full bg-slate-950 opacity-95 z-10 left-0 hidden postModal"
 			>
@@ -169,5 +174,7 @@
 		src="https://kit.fontawesome.com/120f5ae848.js"
 		crossorigin="anonymous"
 	></script>
-	<script src="user.js"></script>
+	<script src="./listing.js"></script>
+	<script src="./like.js"></script>
+	<script src="./comment.js"></script>
 </html>

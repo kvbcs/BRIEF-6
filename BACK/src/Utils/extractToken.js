@@ -1,3 +1,4 @@
+//Fonction d'extraction de token pour vérifier l'utilisateur
 async function extractToken(req) {
 	const headerWithToken = req.headers.authorization;
 	if (typeof headerWithToken !== undefined || headerWithToken) {
@@ -7,4 +8,5 @@ async function extractToken(req) {
 	}
 }
 
+//Exportation des modules
 module.exports = { extractToken };

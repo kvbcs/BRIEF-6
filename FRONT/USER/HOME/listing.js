@@ -5,6 +5,16 @@ let followBtn = document.querySelectorAll(".followBtn");
 let createPost = document.querySelector(".createPost");
 let likeNumber = document.querySelectorAll(".likeNumber").value;
 
+//Fonction déconnexion -------------------------------------------------------------------------------------------------------------
+function handleDisconnect() {
+	window.sessionStorage.clear(jwt);
+	window.sessionStorage.clear(role);
+	setTimeout(() => {
+		window.location.href = "../../INDEX/index.html";
+	}, 1000);
+}
+
+//Fonction qui récupère tous les postes ---------------------------------------------------------------------------------------------
 async function getAllListings() {
 	let apiCall = await fetch("http://localhost:7000/listing/all");
 	let response = await apiCall.json();
@@ -12,7 +22,7 @@ async function getAllListings() {
 
 	response.forEach((listing) => {
 		main.innerHTML += `
-			<div class="flex items-center justify-center min-h-fit max-h-72 mb-24">
+			<div class="flex items-center justify-center min-h-fit max-h-72 mb-10">
 				<article class="border-2 border-sky-500 rounded-xl border p-5 shadow-md w-9/12 bg-white">
 					<div
 						class="flex w-full items-center justify-between border-b pb-3"
@@ -98,66 +108,18 @@ async function getAllListings() {
 
 getAllListings();
 
-async function getAllComments(id) {
-	let aside = document.querySelector(`.aside${id}`);
-	let apiCall = await fetch("http://localhost:7000/comment/all");
-	let response = await apiCall.json();
-	console.log(response);
-
-	response.forEach((comment) => {
-		aside.innerHTML += `
-				<article class="border-2 border-sky-500 min-h-32 max-h-fit rounded-xl p-5 shadow-md w-11/12 bg-white">
-					<div
-						class="flex w-full items-center justify-between border-b pb-3"
-					>
-						<div class="flex items-center space-x-3">
-							<img
-							src="${comment.photo}"
-								class="h-16 w-16 rounded-full bg-slate-400"
-							>
-							<div class="text-lg font-bold text-slate-700">
-								${comment.name}
-							</div>
-						</div>
-						<div class="flex items-center space-x-8">
-							<button
-								class="bg-sky-500 text-white px-2.5 py-1.5 rounded-md followBtn"
-							>
-								<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Follow
-							</button>
-						</div>
-					</div>
-
-					<div class="mt-4 mb-6">
-						<div class="text-sm text-neutral-600">
-							${comment.message}
-						</div>
-					</div>
-				</article>
-		`;
-	});
-}
-
-async function showComments(id) {
-	console.log(id);
-	let aside = document.querySelector(`.aside${id}`);
-	aside.classList.toggle("hidden");
-	getAllComments(id);
-}
-
-function handleDisconnect() {
-	window.sessionStorage.clear(jwt);
-	window.sessionStorage.clear(role);
-	setTimeout(() => {
-		window.location.href = "../INDEX/index.html";
-	}, 1000);
-}
-
+//Fonction qui affiche la modal ----------------------------------------------------------------------------------------------------
 function handleCreatePost() {
 	let postModal = document.querySelector(".postModal");
 	postModal.classList.remove("hidden");
 }
 
+//Fonction qui enlève la modal -----------------------------------------------------------------------------------------------------
+function removeModal() {
+	let postModal = document.querySelector(".postModal");
+	postModal.classList.add("hidden");
+}
+//Fonction création de postes ------------------------------------------------------------------------------------------------------
 async function createListing() {
 	let title = document.querySelector("#title").value;
 	let text = document.querySelector("#text").value;
@@ -191,63 +153,6 @@ async function createListing() {
 		console.log(response);
 		alert("Something went wrong...");
 	}
-}
-function removeModal() {
-	let postModal = document.querySelector(".postModal");
-	postModal.classList.add("hidden");
-}
-
-async function likeContent(id) {
-	console.log(id);
-
-	try {
-		let request = {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json; charset=utf-8",
-				Authorization: `Bearer ${jwt}`,
-			},
-			// body: JSON.stringify(id),
-		};
-		let apiRequest = await fetch(
-			`http://localhost:7000/listing/like/${id}`,
-			request
-		);
-		let response = await apiRequest.json();
-
-		console.log(response, apiRequest);
-	} catch (error) {
-		console.log(error.stack);
-	}
-}
-
-async function dislikeContent(id) {
-	console.log(id);
-
-	try {
-		let request = {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json; charset=utf-8",
-				Authorization: `Bearer ${jwt}`,
-			},
-			// body: JSON.stringify(id),
-		};
-		let apiRequest = await fetch(
-			`http://localhost:7000/listing/dislike/${id}`,
-			request
-		);
-		let response = await apiRequest.json();
-		console.log(response, apiRequest);
-	} catch (error) {
-		console.log(error.stack);
-	}
-}
-
-function createComment(id) {
-	console.log(id);
-	let postModal = document.querySelector(".postModal");
-	postModal.classList.remove("hidden");
 }
 
 function follow(id) {

@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+//Fonction d'emailing
 const transporter = nodemailer.createTransport({
 	host: process.env.SMTP_HOST,
 	port: 26,
@@ -11,4 +12,5 @@ const transporter = nodemailer.createTransport({
 	},
 });
 
+//Exportation des modules
 module.exports = { transporter };

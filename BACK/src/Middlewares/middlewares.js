@@ -1,16 +1,23 @@
 var validator = require("validator");
 
+//Fonction qui vérifie la conformité des données d'inscription
 const verifData = async (req, res, next) => {
+	//Récupération des données envoyées par les utilisateurs
 	const name = req.body.name;
 	const email = req.body.email;
 	const password = req.body.password;
 
+	//Vérification que le nom ne contient que des lettres
 	if (!validator.isAlpha(name)) {
 		return res.json({ message: "Name must contain letters" });
 	}
+
+	//Vérification que l'email soit conforme
 	if (!validator.isEmail(email)) {
 		return res.json({ message: "Invalid email" });
 	}
+
+	//Vérification que le mot de passe soit fort
 	if (!validator.isStrongPassword(password)) {
 		return res.json({ message: "Weak password" });
 	}
@@ -22,6 +29,7 @@ const verifData = async (req, res, next) => {
 	next();
 };
 
+//Fonction qui vérifie si l'utilisateur a modifié son profil
 const verifUpdateUser = async (req, res, next) => {
 	const id = req.params.id;
 	const { name, photo, email, password } = req.body;
@@ -54,6 +62,7 @@ const verifUpdateUser = async (req, res, next) => {
 	next();
 };
 
+//Fonction qui vérifie si l'utilisateur a modifié son post
 const verifUpdateListing = async (req, res, next) => {
 	const id = req.params.id;
 	const { title, text } = req.body;
@@ -78,4 +87,5 @@ const verifUpdateListing = async (req, res, next) => {
 	next();
 };
 
+//Exportation des modules
 module.exports = { verifData, verifUpdateUser, verifUpdateListing };

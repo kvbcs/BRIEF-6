@@ -4,11 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Social Network</title>
-		<link rel="stylesheet" href="../CSS/main.css" />
-		<link rel="stylesheet" href="../CSS/like.css" />
+		<link rel="stylesheet" href="../../CSS/main.css" />
+		<link rel="stylesheet" href="../../CSS/like.css" />
 		<link
 			rel="shortcut icon"
-			href="../MEDIA/favicon-32x32.png"
+			href="../../MEDIA/favicon-32x32.png"
 			type="image/x-icon"
 		/>
 	</head>
@@ -16,18 +16,20 @@
 		<header
 			class="flex flex-row justify-between items-center h-24 bg-slate-950 text-white px-8"
 		>
-			<a href="../INDEX/index.html">
+			<a href="../../USER/HOME/user.html">
 				<img
 					class="h-16"
-					src="../MEDIA/LOGO3.png"
+					src="../../MEDIA/LOGO3.png"
 					alt="Social Network logo"
 			/></a>
 
 			<ul class="flex flex-row gap-5 divide-x">
-				<a href="./user.html"><li class="">Home</li></a>
-				<a href="./profile.html"><li class="pl-3">Profile</li></a>
-				<a href="./myposts.html"><li class="pl-3">My posts</li></a>
-				<li class="pl-3 underline">My follows</li>
+				<a href="../HOME/user.html"><li class="">Home</li></a>
+				<li class="pl-3 underline">Profile</li>
+				<a href="../MY_POSTS/myposts.html"><li class="pl-3">My posts</li></a
+				>
+				<a href="../MY_FOLLOWS/myfollows.html"><li class="pl-3">My follows</li></a
+				>
 			</ul>
 
 			<div class="w-fit gap-8 flex flex-row justify-between">
@@ -42,21 +44,7 @@
 
 		<main
 			class="flex flex-col justify-center items-center gap-28 px-6 py-12 lg:px-8 bg-slate-800 pb-64 pt-24"
-		>
-			<div
-				class="flex flex-col justify-center items-center w-1/2 max-w-lg my-10 bg-white rounded-lg shadow-lg p-5"
-			>
-				<img
-					class="w-32 h-32 rounded-full mx-auto"
-					src="https://picsum.photos/200"
-					alt="Profile picture"
-				/>
-				<h2 class="text-center text-2xl font-semibold mt-3">
-					Username
-				</h2>
-				<p class="text-center text-gray-600 mt-1">John Doe</p>
-			</div>
-		</main>
+		></main>
 
 		<footer
 			class="absolute bottom-0 w-full flex flex-row justify-evenly px-3.5 items-center h-32 bg-slate-950 text-white"
