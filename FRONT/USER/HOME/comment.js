@@ -7,34 +7,33 @@ async function getAllComments(id) {
 
 	response.forEach((comment) => {
 		aside.innerHTML += `
-				<article class="border-2 border-sky-500 min-h-32 max-h-fit rounded-xl p-5 shadow-md w-11/12 bg-white">
-					<div
-						class="flex w-full items-center justify-between border-b pb-3"
-					>
-						<div class="flex items-center space-x-3">
-							<img
-							src="${comment.photo}"
-								class="h-16 w-16 rounded-full bg-slate-400"
-							>
-							<div class="text-lg font-bold text-slate-700">
-								${comment.name}
-							</div>
-						</div>
-						<div class="flex items-center space-x-8">
-							<button
-								class="bg-sky-500 text-white px-2.5 py-1.5 rounded-md followBtn"
-							>
-								<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Follow
-							</button>
+			<article class="border-2 border-sky-500 h-fit rounded-xl p-5 shadow-md w-11/12 bg-white">
+				<div
+					class="flex w-full items-center justify-between border-b pb-3"
+				>
+					<div class="flex items-center space-x-3">
+						<img
+						src="${comment.photo}"
+							class="h-16 w-16 rounded-full bg-slate-400"
+						>
+						<div class="text-lg font-bold text-slate-700">
+							${comment.name}
 						</div>
 					</div>
-
-					<div class="mt-4 mb-6">
-						<div class="text-sm text-neutral-600">
-							${comment.message}
-						</div>
+					<div class="flex items-center space-x-8">
+						<button
+							class="bg-sky-500 text-white px-2.5 py-1.5 rounded-md followBtn"
+						>
+							<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Follow
+						</button>
 					</div>
-				</article>
+				</div>
+				<div class="mt-4 mb-6">
+					<div class="text-sm text-neutral-600">
+						${comment.message}
+					</div>
+				</div>
+			</article>
 		`;
 	});
 }
@@ -48,11 +47,12 @@ async function showComments(id) {
 }
 
 //Fonction pour créer commentaires--------------------------------------------------------------------------------------------
-async function createComment() {
+async function handleCreateComment(id) {
+	console.log(id, "marche");
 	let message = document.querySelector("#message").value;
 	let id_user = jwt.id_user;
 	let photo = jwt.photo;
-	let id_listing = req.params.id;
+	let id_listing = id;
 	let name = jwt.name;
 	console.log(id_listing);
 
@@ -73,11 +73,14 @@ async function createComment() {
 		body: JSON.stringify(comment),
 	};
 
-	let apiRequest = fetch("http://localhost:7000/comment/create/`${id}", request);
+	let apiRequest = await fetch(
+		`http://localhost:7000/comment/create/${id}`,
+		request
+	);
 	let response = await apiRequest;
-	console.log(response);
+	let result = await response.json();
 	if (response.status === 200) {
-		console.log(response);
+		console.log(result);
 		alert("Comment created successfully");
 		window.location.reload();
 	} else {
