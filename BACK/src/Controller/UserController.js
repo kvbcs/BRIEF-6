@@ -154,11 +154,11 @@ const ctrlLogin = async (req, res) => {
 const ctrlAllUsers = async (req, res) => {
 	//Requête récupérant tous les utilisateurs
 	try {
-		const sql =
-			"SELECT id_user, name, email, isActive, createdAt FROM user";
-		const [rows] = await pool.query(sql);
+		const values = [id];
+		const sql = "SELECT * FROM user WHERE id_user = ?";
+		const [rows] = await pool.query(sql, values);
 
-		//MEssage de succès
+		//eEssage de succès
 		console.log(rows);
 		res.status(200).json(rows);
 

@@ -96,8 +96,8 @@ async function getAllListings() {
 							</div>
 						</div>
 							<aside 
-							class="aside${listing._id} flex flex-col gap-8 pt-6 pb-14 mt-10 items-center 
-							justify-center bg-slate-900 w-full min-h-fit h-96 overflow-x-auto rounded-md hidden"
+							class="aside${listing._id} flex flex-col gap-8 pt-20 pb-10 mt-10 items-center 
+							justify-center bg-slate-900 w-full min-h-fit max-h-72 overflow-x-auto rounded-md hidden"
 							>
 								<h2 class="text-white m-10"> Loading Comments </h2>
 							</aside>

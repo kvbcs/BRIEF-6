@@ -20,7 +20,7 @@ const userRouter = express.Router();
 //Instanciation des routes du CRUD pour user
 userRouter.post("/register", ctrlRegister);
 userRouter.post("/login", ctrlLogin);
-userRouter.get("/all", ctrlAllUsers);
+userRouter.get("/one", ctrlAllUsers);
 userRouter.delete("/delete/:id", ctrlDeleteUser);
 userRouter.patch("/update/:id", verifUpdateUser, ctrlUpdateUser);
 
