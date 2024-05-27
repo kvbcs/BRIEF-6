@@ -5,8 +5,11 @@ const { connect } = require("./Services/MongoConnexion");
 const userRouter = require("./Controller/Routes/user");
 const listingRouter = require("./Controller/Routes/listing");
 const commentRouter = require("./Controller/Routes/comment");
+const path = require("path");
 require("dotenv").config();
 
+const test = path.join(__dirname, "/public");
+app.use(express.static(test));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());

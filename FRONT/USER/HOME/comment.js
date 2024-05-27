@@ -47,9 +47,47 @@ async function showComments(id) {
 	getAllComments(id);
 }
 
-//TODO: Fonction pour créer commentaires--------------------------------------------------------------------------------------------
-function createComment(id) {
-	console.log(id);
-	let postModal = document.querySelector(".postModal");
-	postModal.classList.remove("hidden");
+//Fonction pour créer commentaires--------------------------------------------------------------------------------------------
+async function createComment() {
+	let message = document.querySelector("#message").value;
+	let id_user = jwt.id_user;
+	let photo = jwt.photo;
+	let id_listing = req.params.id;
+	let name = jwt.name;
+	console.log(id_listing);
+
+	let comment = {
+		message: message,
+		id_listing: id_listing,
+		id_user: id_user,
+		photo: photo,
+		name: name,
+	};
+
+	let request = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+			Authorization: `Bearer ${jwt}`,
+		},
+		body: JSON.stringify(comment),
+	};
+
+	let apiRequest = fetch("http://localhost:7000/comment/create/`${id}", request);
+	let response = await apiRequest;
+	console.log(response);
+	if (response.status === 200) {
+		console.log(response);
+		alert("Comment created successfully");
+		window.location.reload();
+	} else {
+		console.log(response);
+		alert("Something went wrong...");
+	}
+}
+
+//Fonction qui enlève la modal comment ---------------------------------------------------------------------------------------------
+function removeModal() {
+	let commentModal = document.querySelector(".commentModal");
+	commentModal.classList.add("hidden");
 }

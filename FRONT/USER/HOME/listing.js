@@ -29,7 +29,7 @@ async function getAllListings() {
 					>
 						<div class="flex items-center space-x-3">
 							<img
-							src="${listing.photo}"
+							src="http://localhost:7000/Uploads/${listing.photo}"
 								class="h-16 w-16 rounded-full bg-slate-400"
 							>
 							<div class="text-lg font-bold text-slate-700">
@@ -77,7 +77,7 @@ async function getAllListings() {
 												<span class="likeNumber('${listing._id}')">${listing.like_number}</span>
 										</button>
 										<button 
-											class="min-w-32 max-w-fit text-white bg-red-600 hover:bg-red-800 rounded-lg p-2"
+											class="btnComment min-w-32 max-w-fit text-white bg-red-600 hover:bg-red-800 rounded-lg p-2"
 											onclick="dislikeContent('${listing._id}')"
 										>
 											<i class="fa-solid fa-thumbs-down" style="color: #ffffff;"></i>
@@ -86,7 +86,7 @@ async function getAllListings() {
 										</button>
 										<button 
 											class="min-w-32 max-w-fit text-white bg-sky-500 hover:bg-sky-700 rounded-lg p-2"
-											onclick="createComment('${listing._id}')"
+											onclick="showCommentModal('${listing._id}')"
 										>
 											<i class="fa-solid fa-comment-dots" style="color: #ffffff;"></i>
 												<span>Comment</span>
@@ -124,13 +124,13 @@ async function createListing() {
 	let title = document.querySelector("#title").value;
 	let text = document.querySelector("#text").value;
 	let id_user = jwt.id_user;
-	let like_number = 0;
+	let photo;
 
 	let listing = {
 		title: title,
 		text: text,
-		like_number: like_number,
 		id_user: id_user,
+		photo: photo,
 	};
 
 	let request = {
@@ -158,4 +158,10 @@ async function createListing() {
 function follow(id) {
 	console.log(id);
 	followText.innerText = "Followed";
+}
+
+function showCommentModal(id) {
+	console.log(id);
+	let commentModal = document.querySelector(".commentModal");
+	commentModal.classList.remove("hidden");
 }
