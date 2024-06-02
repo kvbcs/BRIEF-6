@@ -1,6 +1,6 @@
 Fonctionnalités USER : 
 
-REGISTER : L'user peut s'enregistrer sur le site
+REGISTER : L'user peut s'enregistrer sur le site </br>
 LOGIN : L'user peut se connecter sur le site
 POST : L'user peut voir et créer des postes
 LIKE/DISLIKE : L'user peut liker et disliker tous les postes
