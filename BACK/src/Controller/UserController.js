@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { pool } = require("../Services/MySQLConnexion");
 var validator = require("validator");
 const { transporter } = require("../Services/mailer");
+const { extractToken } = require("../Utils/extractToken");
 require("dotenv").config();
 
 //Fonction pour s'inscrire -------------------------------------------------------------------------------------------------------------
@@ -152,9 +153,25 @@ const ctrlLogin = async (req, res) => {
 
 //Fonction pour obtenir tous les utilisateurs pour l'admin ----------------------------------------------------------------------------
 const ctrlAllUsers = async (req, res) => {
+	const token = await extractToken(req);
+
+	//Vérification que le jwt existe
+	jwt.verify(token, process.env.SECRET_KEY, async (err, authData) => {
+		//Si négatif, message d'erreur
+		if (err) {
+			console.log(err.stack);
+			res.status(401).json({ err: "Unauthorized" });
+			return;
+
+			//Sinon, récupération des données
+		} else {
+			id_user = authData.id_user;
+		}
+		console.log(id_user);
+	});
 	//Requête récupérant tous les utilisateurs
 	try {
-		const values = [id];
+		const values = [id_user];
 		const sql = "SELECT * FROM user WHERE id_user = ?";
 		const [rows] = await pool.query(sql, values);
 

@@ -8,8 +8,8 @@ const verifData = async (req, res, next) => {
 	const password = req.body.password;
 
 	//Vérification que le nom ne contient que des lettres
-	if (!validator.isAlpha(name)) {
-		return res.json({ message: "Name must contain letters" });
+	if (!validator.isAlphanumeric(name)) {
+		return res.json({ message: "Name must contain letters and numbers" });
 	}
 
 	//Vérification que l'email soit conforme

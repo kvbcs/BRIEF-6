@@ -122,8 +122,8 @@ async function resetPassword() {
 
 	console.log(response, truc);
 	if (response.status === 200) {
-		alert("reset success");
+		alert("Reset password successful, check your mails !");
 	} else {
-		alert("reset fail");
+		alert("Invalid credentials");
 	}
 }
